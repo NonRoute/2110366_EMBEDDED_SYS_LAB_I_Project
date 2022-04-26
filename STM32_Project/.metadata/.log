@@ -1,0 +1,18 @@
+!SESSION 2022-04-26 16:47:51.297 -----------------------------------------------
+eclipse.buildId=Version 1.9.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-04-26 16:47:54.447
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-04-26 16:47:54.487
+!MESSAGE Log4j initialized with config file D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-04-26 16:47:56.694
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-04-26 16:49:47.179
+!MESSAGE Indexed 'Final_Project' (22 sources, 82 headers) in 1.75 sec: 4,741 declarations; 22,720 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0073%)
