@@ -278,3 +278,112 @@ Finished building: default.size.stdout
  
 Finished building: Final_Project.list
  
+15:26:08 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:101:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
+  101 |   if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detect Sound
+      |                                           ^~
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+   7932	     20	   1636	   9588	   2574	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+15:32:17 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
+  113 |   if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) {
+      |                                           ^~
+../Core/Src/main.c:114:22: error: 'GPOIOA' undeclared (first use in this function); did you mean 'GPIOA'?
+  114 |    HAL_GPIO_WritePin(GPOIOA, GPIO_PIN_5, 1);
+      |                      ^~~~~~
+      |                      GPIOA
+../Core/Src/main.c:114:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:92:6: warning: unused variable 'have_undetect' [-Wunused-variable]
+   92 |  int have_undetect = 1;
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:91:6: warning: unused variable 'detect_delay' [-Wunused-variable]
+   91 |  int detect_delay = 100;
+      |      ^~~~~~~~~~~~
+../Core/Src/main.c:90:6: warning: unused variable 'undetect_time' [-Wunused-variable]
+   90 |  int undetect_time = 0;
+      |      ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+15:32:29 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
+  113 |   if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) {
+      |                                           ^~
+../Core/Src/main.c:114:22: error: 'GPOIA' undeclared (first use in this function); did you mean 'GPIOA'?
+  114 |    HAL_GPIO_WritePin(GPOIA, GPIO_PIN_5, 1);
+      |                      ^~~~~
+      |                      GPIOA
+../Core/Src/main.c:114:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:92:6: warning: unused variable 'have_undetect' [-Wunused-variable]
+   92 |  int have_undetect = 1;
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:91:6: warning: unused variable 'detect_delay' [-Wunused-variable]
+   91 |  int detect_delay = 100;
+      |      ^~~~~~~~~~~~
+../Core/Src/main.c:90:6: warning: unused variable 'undetect_time' [-Wunused-variable]
+   90 |  int undetect_time = 0;
+      |      ^~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+15:32:42 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
+  113 |   if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) {
+      |                                           ^~
+../Core/Src/main.c:92:6: warning: unused variable 'have_undetect' [-Wunused-variable]
+   92 |  int have_undetect = 1;
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:91:6: warning: unused variable 'detect_delay' [-Wunused-variable]
+   91 |  int detect_delay = 100;
+      |      ^~~~~~~~~~~~
+../Core/Src/main.c:90:6: warning: unused variable 'undetect_time' [-Wunused-variable]
+   90 |  int undetect_time = 0;
+      |      ^~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+   7780	     20	   1636	   9436	   24dc	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+15:44:10 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:101:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
+  101 |   if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
+      |                                           ^~
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+   7932	     20	   1636	   9588	   2574	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 

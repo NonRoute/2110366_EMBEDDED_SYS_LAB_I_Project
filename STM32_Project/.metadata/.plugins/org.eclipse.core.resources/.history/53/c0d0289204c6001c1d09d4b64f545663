@@ -87,9 +87,9 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
-	int undetected_time = 0;
-	int detected_delay = 100;
-	int is_detected = 0;
+	int undetect_time = 0;
+	int detect_delay = 100;
+	int have_undetect = 1;
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -98,17 +98,23 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
-			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
-				HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
-			}
-			is_detected = 1;
-			undetected_time = 0;
-		} else { // undetected sound
-			undetected_time++;
-			is_detected = 0;
+//		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detect Sound
+//			if (have_undetect && undetect_time > detect_delay) {
+//				HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
+//			}
+//			have_undetect = 0;
+//			undetect_time = 0;
+//		} else { // undetect sound
+//			undetect_time++;
+//			have_undetect = 1;
+//		}
+//		HAL_Delay(1);
+
+		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) {
+			HAL_GPIO_WritePin(GPOIOA, GPIO_PIN_5, 1);
+		} else {
+			HAL_GPIO_WritePin(GPOIOA, GPIO_PIN_5, 0);
 		}
-		HAL_Delay(1);
 	}
 	/* USER CODE END 3 */
 }

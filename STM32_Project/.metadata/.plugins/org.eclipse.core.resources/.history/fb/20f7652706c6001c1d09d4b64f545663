@@ -99,7 +99,7 @@ int main(void) {
 
 		/* USER CODE BEGIN 3 */
 		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
-			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
+			if (!is_detected && undetected_time > detected_delay) {
 				HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
 			}
 			is_detected = 1;
@@ -109,6 +109,12 @@ int main(void) {
 			is_detected = 0;
 		}
 		HAL_Delay(1);
+
+//		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) {
+//			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+//		} else {
+//			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+//		}
 	}
 	/* USER CODE END 3 */
 }

@@ -87,9 +87,8 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
-	int undetected_time = 0;
-	int detected_delay = 100;
-	int is_detected = 0;
+	int val = 0;
+//	int toggle = 0;
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -98,16 +97,12 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
-			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
-				HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
-			}
-			is_detected = 1;
-			undetected_time = 0;
-		} else { // undetected sound
-			undetected_time++;
-			is_detected = 0;
+		val = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
+		if (val == 0) {
+			HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+//			HAL_Delay(1000);
 		}
+//		toggle = val;
 		HAL_Delay(1);
 	}
 	/* USER CODE END 3 */
