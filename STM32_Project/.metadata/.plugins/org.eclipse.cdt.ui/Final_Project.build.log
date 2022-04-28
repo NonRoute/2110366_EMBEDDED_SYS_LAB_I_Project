@@ -1,21 +1,45 @@
-22:21:46 **** Incremental Build of configuration Debug for project Final_Project ****
+00:46:08 **** Incremental Build of configuration Debug for project Final_Project ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/tcs3200.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/tcs3200.d" -MT"Core/Src/tcs3200.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/tcs3200.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:108:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
-  108 |   if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
-      |                                           ^~
+../Core/Src/main.c:168:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  168 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), 1000);
+      |                                       ^~~~~~
+../Core/Src/main.c:168:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:27:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   26 | #include <stdio.h>
+  +++ |+#include <string.h>
+   27 | //#include <stdbool.h>
+../Core/Src/main.c:168:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  168 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), 1000);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
 arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Final_Project.elf
- 
-arm-none-eabi-size   Final_Project.elf 
-arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
-   text	   data	    bss	    dec	    hex	filename
-   9548	     20	   1708	  11276	   2c0c	Final_Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Final_Project.list
- 
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:19: multiple definition of `IC_ColorMode'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:19: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:20: multiple definition of `calibrate_number'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:20: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:22: multiple definition of `TimeColor_H'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:22: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:22: multiple definition of `TimeColor_L'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:22: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:23: multiple definition of `TimeColor'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:23: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:24: multiple definition of `FreqColor'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:24: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o: in function `Set_Filter':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:104: multiple definition of `Set_Filter'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:104: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o: in function `Set_Scaling':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:124: multiple definition of `Set_Scaling'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:124: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:142: multiple definition of `Output_Color'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:142: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/tcs3200.o: in function `GetColor':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:144: multiple definition of `GetColor'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/tcs3200.c:144: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: Final_Project.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
 
-22:21:46 Build Finished. 0 errors, 1 warnings. (took 655ms)
+00:46:09 Build Failed. 14 errors, 3 warnings. (took 601ms)
 
