@@ -92,7 +92,7 @@ int main(void) {
 	MX_ADC1_Init();
 	/* USER CODE BEGIN 2 */
 	int undetected_time = 0;
-	const int detected_delay = 20;
+	int detected_delay = 100;
 	int is_detected = 0;
 	uint32_t lastClap = HAL_GetTick();
 	int clapCount = 0;
@@ -107,15 +107,14 @@ int main(void) {
 		/* USER CODE BEGIN 3 */
 		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
 			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
-				if (HAL_GetTick() <= lastClap + timeBetweenClap)
+//				if (HAL_GetTick() <= lastClap + timeBetweenClap)
 					clapCount += 1;
-				else
-					clapCount = 1;
+//				else
+//					clapCount = 1;
 				if (clapCount >= 3) {
 					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
 					clapCount = 0;
 				}
-				lastClap = HAL_GetTick();
 			}
 			is_detected = 1;
 			undetected_time = 0;

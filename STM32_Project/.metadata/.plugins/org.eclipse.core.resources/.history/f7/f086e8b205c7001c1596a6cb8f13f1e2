@@ -91,9 +91,7 @@ int main(void) {
 	MX_USART2_UART_Init();
 	MX_ADC1_Init();
 	/* USER CODE BEGIN 2 */
-	int undetected_time = 0;
-	const int detected_delay = 20;
-	int is_detected = 0;
+	char buffer[10];
 	uint32_t lastClap = HAL_GetTick();
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
@@ -105,23 +103,19 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
+
 		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
-			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
-				if (HAL_GetTick() <= lastClap + timeBetweenClap)
-					clapCount += 1;
-				else
-					clapCount = 1;
-				if (clapCount >= 3) {
-					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
-					clapCount = 0;
-				}
-				lastClap = HAL_GetTick();
+			if (HAL_GetTick() <= lastClap + timeBetweenClap)
+				clapCount += 1;
+			else
+				clapCount = 1;
+			if (clapCount >= 3) {
+				HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
+				clapCount = 0;
 			}
-			is_detected = 1;
-			undetected_time = 0;
-		} else { // undetected sound
-			undetected_time++;
-			is_detected = 0;
+			while (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK)
+				HAL_Delay(1);
+			lastClap = HAL_GetTick();
 		}
 		HAL_Delay(1);
 	}
