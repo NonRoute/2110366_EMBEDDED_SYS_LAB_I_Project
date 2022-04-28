@@ -1560,3 +1560,376 @@
 2022-04-27 15:02:13,578 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 953mS.
 2022-04-27 15:02:13,579 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
 2022-04-27 15:02:13,583 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,062 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,063 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,073 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,087 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,087 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,088 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:45,098 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,342 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,342 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,342 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,343 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,353 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,368 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,379 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,440 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,441 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,452 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,466 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,467 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:46,476 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,282 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,282 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,282 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,282 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,282 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,283 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,294 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,311 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,322 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,382 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,383 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,383 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,383 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,383 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,383 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,393 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,406 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,407 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,410 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,410 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,410 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,410 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,410 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,411 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:38:57,421 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,814 [INFO] ParamManager:825 - [Generic UI] PropertyChangeEvent: TAB_STATUS_CHANGED , "dont care", "never mind"
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,815 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,819 [INFO] ParamManager:825 - [Generic UI] PropertyChangeEvent: TAB_STATUS_CHANGED , "dont care", "never mind"
+2022-04-27 16:39:01,820 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,828 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,828 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,829 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,833 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,879 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-04-27 16:39:01,936 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,991 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:01,992 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,002 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,016 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,017 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,027 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,464 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,464 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,464 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,464 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,464 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,465 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,474 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,489 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,499 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,557 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,558 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,568 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,581 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,581 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,581 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,581 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,581 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,582 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:02,591 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,651 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,652 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,652 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,652 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,652 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,652 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,652 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,661 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,674 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,674 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,675 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,684 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,741 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,741 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,741 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,741 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,741 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,741 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,742 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,752 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,766 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:03,776 [INFO] ADCParametersView:109 -                Rank 1 : false
+2022-04-27 16:39:06,302 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 301298280 Bytes (947912704)
+2022-04-27 16:39:07,302 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 253496960 Bytes (947912704)
+2022-04-27 16:39:07,635 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 248019056 Bytes (947912704)
+2022-04-27 16:39:07,772 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-04-27 16:39:07,772 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-04-27 16:39:07,772 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-04-27 16:39:07,772 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-04-27 16:39:07,772 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: ADC
+2022-04-27 16:39:07,773 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-04-27 16:39:07,784 [INFO] CodeGenerator:681 - code generatio: config db path: C:\ST\STM32CubeIDE_1.9.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\
+2022-04-27 16:39:07,878 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp_save
+2022-04-27 16:39:07,928 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp
+2022-04-27 16:39:07,942 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp_save
+2022-04-27 16:39:07,993 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp
+2022-04-27 16:39:08,040 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c_save
+2022-04-27 16:39:08,088 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c
+2022-04-27 16:39:08,096 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h_save
+2022-04-27 16:39:08,140 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h
+2022-04-27 16:39:08,152 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c_save
+2022-04-27 16:39:08,223 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c
+2022-04-27 16:39:08,229 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp_save
+2022-04-27 16:39:08,270 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp
+2022-04-27 16:39:08,282 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h_save
+2022-04-27 16:39:08,340 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h
+2022-04-27 16:39:08,366 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h_save
+2022-04-27 16:39:08,418 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h
+2022-04-27 16:39:08,426 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c_save
+2022-04-27 16:39:08,499 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c
+2022-04-27 16:39:08,935 [INFO] ProjectBuilder:2913 - Time for Copy HAL[1] : 230mS.
+2022-04-27 16:39:08,966 [INFO] ProjectBuilder:4015 - Project Generator version: 3.16.0
+2022-04-27 16:39:09,139 [INFO] ConfigFileManager:1287 - The Die is : DIE431
+2022-04-27 16:39:09,730 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 764mS.
+2022-04-27 16:39:09,731 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 1mS.
+2022-04-27 16:39:09,736 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-04-28 22:07:30,348 [INFO] Activator:177 - 
+
+
+2022-04-28 22:07:30,350 [INFO] Activator:178 - !SESSION log4j initialized
+2022-04-28 22:07:35,506 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
