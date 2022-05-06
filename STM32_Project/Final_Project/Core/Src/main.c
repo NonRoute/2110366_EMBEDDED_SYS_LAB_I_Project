@@ -78,13 +78,14 @@ enum Filter {
 	Red, Blue, Clear, Green
 };
 
+/* Measure Frequency */
 uint32_t IC_Val1 = 0;
 uint32_t IC_Val2 = 0;
 uint32_t Difference = 0;
 int Is_First_Captured = 0;
 
-/* Measure Frequency */
 uint8_t set_color;
+int wait_for_callback = 0;
 float frequency = 0;
 float Output_Color = 0;
 
@@ -139,30 +140,12 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 			if (Output_Color < 0)
 				Output_Color = 0;
 
-			//print output
-			char buffer[20];
-			switch (set_color) {
-			case Red:
-				sprintf(buffer, "Red = %f \r\n", Output_Color);
-				HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
-				HAL_MAX_DELAY);
-				break;
-			case Green:
-				sprintf(buffer, "Green = %f \r\n", Output_Color);
-				HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
-				HAL_MAX_DELAY);
-				break;
-			case Blue:
-				sprintf(buffer, "Blue = %f \r\n", Output_Color);
-				HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
-				HAL_MAX_DELAY);
-				break;
-			}
+			wait_for_callback = 0;
 		}
 	}
 }
 
-Set_Scaling(int mode) {
+void Set_Scaling(int mode) {
 	switch (mode) {
 	case (Scl0): //OUTPUT FREQUENCY SCALING = 0%
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
@@ -204,6 +187,35 @@ void Set_Filter(uint8_t mode) //Mode es de tipo enum Filtro
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
 		break;
 	}
+}
+
+void Print_Output(uint8_t set_color) {
+	char buffer[20];
+	switch (set_color) {
+	case Red:
+		sprintf(buffer, "Red = %f \r\n", Output_Color);
+		break;
+	case Green:
+		sprintf(buffer, "Green = %f \r\n", Output_Color);
+		break;
+	case Blue:
+		sprintf(buffer, "Blue = %f \r\n", Output_Color);
+		break;
+	}
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+}
+
+void GetColor(uint8_t set_color) {
+	Set_Filter(set_color);
+	wait_for_callback = 1;
+	HAL_TIM_IC_Start_IT(&htim3, 3);
+	while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		HAL_Delay(1);
+
+	}
+	HAL_TIM_IC_Start_IT(&htim3, 3);
+	Print_Output(set_color);
 }
 
 /* USER CODE END 0 */
@@ -276,12 +288,36 @@ int main(void) {
 //			is_detected = 0;
 //		}
 //		HAL_Delay(1);
+//		GetColor(Red);
 		Set_Filter(Red);
-		HAL_Delay(1000);
+		wait_for_callback = 1;
+		HAL_TIM_IC_Start_IT(&htim3, 3);
+		while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
+		}
+		HAL_TIM_IC_Start_IT(&htim3, 3);
+		Print_Output(Red);
+		HAL_Delay(300);
+
 		Set_Filter(Green);
-		HAL_Delay(1000);
+		wait_for_callback = 1;
+		HAL_TIM_IC_Start_IT(&htim3, 3);
+		while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
+
+		}
+		HAL_TIM_IC_Start_IT(&htim3, 3);
+		Print_Output(Green);
+		HAL_Delay(300);
+
 		Set_Filter(Blue);
-		HAL_Delay(1000);
+		wait_for_callback = 1;
+		HAL_TIM_IC_Start_IT(&htim3, 3);
+		while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
+
+		}
+		HAL_TIM_IC_Start_IT(&htim3, 3);
+		Print_Output(Blue);
+		HAL_Delay(300);
+
 	}
 	/* USER CODE END 3 */
 }
