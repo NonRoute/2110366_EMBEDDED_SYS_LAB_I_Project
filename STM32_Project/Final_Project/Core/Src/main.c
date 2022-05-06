@@ -22,8 +22,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "tcs3200.c"
-#include <stdio.h>
 //#include <stdbool.h>
 
 #define VIRTUALIZAR_SENSOR 0
@@ -44,6 +42,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim3;
+
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -54,13 +54,14 @@ UART_HandleTypeDef huart2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int colorRed, colorGreen, colorBlue;
+
 /* USER CODE END 0 */
 
 /**
@@ -91,19 +92,8 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
+	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
-//	Captura_TCS3200_Init();
-	Delay_Init();
-//	TCS3200_Config();
-
-//	USART3_Init(9600);
-
-	Set_Filter(Clear);
-	Set_Scaling(Scl100);
-
-	colorRed = 0;
-	colorGreen = 0;
-	colorBlue = 0;
 
 //	int undetected_time = 0;
 //	const int detected_delay = 20;
@@ -111,7 +101,6 @@ int main(void) {
 //	uint32_t lastClap = HAL_GetTick();
 //	int clapCount = 0;
 //	const int timeBetweenClap = 1000;
-
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -139,49 +128,6 @@ int main(void) {
 //			is_detected = 0;
 //		}
 //		HAL_Delay(1);
-		colorRed = GetColor(Red);
-		colorGreen = GetColor(Green);
-		colorBlue = GetColor(Blue);
-
-		if (VIRTUALIZAR_SENSOR) {
-			colorRed = colorRed + 10;
-			colorGreen = colorGreen + 5;
-			colorBlue = colorBlue + 15;
-
-			if (colorRed >= 255)
-				colorRed = 0;
-			if (colorGreen >= 255)
-				colorGreen = 0;
-			if (colorBlue >= 255)
-				colorBlue = 0;
-		}
-
-//		USART_SendData(USART1, colorRed);
-//		DelayMillis(10);
-//		USART_SendData(USART1, colorGreen);
-//		DelayMillis(10);
-//		USART_SendData(USART1, colorBlue);
-//		DelayMillis(10);
-
-		char buffer[20];
-		sprintf(buffer, "pb0: %d \r\n", colorRed);
-		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), 1000);
-//		int pb1 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
-//
-//		sprintf(buffer, "pb1: %d \r\n", pb1);
-//		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), 1000);
-//
-//		int pb2 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2);
-//
-//		sprintf(buffer, "pb2: %d \r\n", pb2);
-//		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), 1000);
-//
-//		int pb3 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
-//
-//		sprintf(buffer, "pb3: %d \r\n", pb3);
-//		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), 1000);
-//
-//		HAL_Delay(10);
 	}
 	/* USER CODE END 3 */
 }
@@ -227,6 +173,59 @@ void SystemClock_Config(void) {
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
 		Error_Handler();
 	}
+}
+
+/**
+ * @brief TIM3 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM3_Init(void) {
+
+	/* USER CODE BEGIN TIM3_Init 0 */
+
+	/* USER CODE END TIM3_Init 0 */
+
+	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
+	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
+	TIM_IC_InitTypeDef sConfigIC = { 0 };
+
+	/* USER CODE BEGIN TIM3_Init 1 */
+
+	/* USER CODE END TIM3_Init 1 */
+	htim3.Instance = TIM3;
+	htim3.Init.Prescaler = 84;
+	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim3.Init.Period = 20000 - 1;
+	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
+		Error_Handler();
+	}
+	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+	if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK) {
+		Error_Handler();
+	}
+	if (HAL_TIM_IC_Init(&htim3) != HAL_OK) {
+		Error_Handler();
+	}
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig)
+			!= HAL_OK) {
+		Error_Handler();
+	}
+	sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+	sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+	sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+	sConfigIC.ICFilter = 0;
+	if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_3) != HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN TIM3_Init 2 */
+
+	/* USER CODE END TIM3_Init 2 */
+
 }
 
 /**
@@ -278,7 +277,8 @@ static void MX_GPIO_Init(void) {
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_3, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4,
+			GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : B1_Pin */
 	GPIO_InitStruct.Pin = B1_Pin;
@@ -293,17 +293,11 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
-	/*Configure GPIO pins : PB0 PB3 */
-	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_3;
+	/*Configure GPIO pins : PB1 PB2 PB3 PB4 */
+	GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : PB1 PB2 PB4 */
-	GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_4;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
