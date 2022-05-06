@@ -4405,3 +4405,78 @@
 2022-05-06 23:43:56,155 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 1538mS.
 2022-05-06 23:43:56,156 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 1mS.
 2022-05-06 23:43:56,162 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-05-07 00:24:49,585 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-07 00:29:21,796 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-07 00:29:22,745 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 472617664 Bytes (925892608)
+2022-05-07 00:29:23,563 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 489394880 Bytes (925892608)
+2022-05-07 00:29:27,139 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 607361728 Bytes (925892608)
+2022-05-07 00:29:27,293 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-05-07 00:29:27,294 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-05-07 00:29:27,294 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8
+2022-05-07 00:29:27,294 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8
+2022-05-07 00:29:27,294 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-05-07 00:29:27,294 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-05-07 00:29:27,294 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-05-07 00:29:27,295 [INFO] CodeGenerator:681 - code generatio: config db path: C:\ST\STM32CubeIDE_1.9.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\
+2022-05-07 00:29:27,415 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp_save
+2022-05-07 00:29:27,478 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp
+2022-05-07 00:29:27,497 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp_save
+2022-05-07 00:29:27,618 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp
+2022-05-07 00:29:27,747 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c_save
+2022-05-07 00:29:27,817 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c
+2022-05-07 00:29:27,824 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h_save
+2022-05-07 00:29:27,881 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h
+2022-05-07 00:29:27,896 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c_save
+2022-05-07 00:29:27,973 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c
+2022-05-07 00:29:27,979 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp_save
+2022-05-07 00:29:28,026 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp
+2022-05-07 00:29:28,040 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h_save
+2022-05-07 00:29:28,106 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h
+2022-05-07 00:29:28,130 [WARN] IPConfigManager:3312 - IP not found : TIM
+2022-05-07 00:29:28,131 [WARN] CodeGenerator:3483 - IP not found : null
+2022-05-07 00:29:28,145 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h_save
+2022-05-07 00:29:28,219 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h
+2022-05-07 00:29:28,230 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c_save
+2022-05-07 00:29:28,352 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c
+2022-05-07 00:29:28,865 [INFO] ProjectBuilder:2913 - Time for Copy HAL[1] : 196mS.
+2022-05-07 00:29:28,869 [INFO] ProjectBuilder:4015 - Project Generator version: 3.16.0
+2022-05-07 00:29:29,030 [INFO] ConfigFileManager:1287 - The Die is : DIE431
+2022-05-07 00:29:29,947 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 1078mS.
+2022-05-07 00:29:29,948 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-05-07 00:29:29,955 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-05-07 00:36:20,841 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 577881712 Bytes (925892608)
+2022-05-07 00:36:21,645 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 595627768 Bytes (925892608)
+2022-05-07 00:36:22,049 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 659064568 Bytes (925892608)
+2022-05-07 00:36:22,192 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-05-07 00:36:22,192 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-05-07 00:36:22,192 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8
+2022-05-07 00:36:22,192 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-05-07 00:36:22,192 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-05-07 00:36:22,192 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-05-07 00:36:22,193 [INFO] CodeGenerator:681 - code generatio: config db path: C:\ST\STM32CubeIDE_1.9.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\
+2022-05-07 00:36:22,355 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp_save
+2022-05-07 00:36:22,433 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp
+2022-05-07 00:36:22,451 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp_save
+2022-05-07 00:36:22,518 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp
+2022-05-07 00:36:22,607 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c_save
+2022-05-07 00:36:22,659 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c
+2022-05-07 00:36:22,666 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h_save
+2022-05-07 00:36:22,717 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h
+2022-05-07 00:36:22,734 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c_save
+2022-05-07 00:36:22,815 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c
+2022-05-07 00:36:22,825 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp_save
+2022-05-07 00:36:22,873 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp
+2022-05-07 00:36:22,886 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h_save
+2022-05-07 00:36:22,964 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h
+2022-05-07 00:36:22,988 [WARN] IPConfigManager:3312 - IP not found : TIM
+2022-05-07 00:36:22,989 [WARN] CodeGenerator:3483 - IP not found : null
+2022-05-07 00:36:22,998 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h_save
+2022-05-07 00:36:23,059 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h
+2022-05-07 00:36:23,069 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c_save
+2022-05-07 00:36:23,185 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c
+2022-05-07 00:36:23,663 [INFO] ProjectBuilder:2913 - Time for Copy HAL[1] : 195mS.
+2022-05-07 00:36:23,667 [INFO] ProjectBuilder:4015 - Project Generator version: 3.16.0
+2022-05-07 00:36:23,815 [INFO] ConfigFileManager:1287 - The Die is : DIE431
+2022-05-07 00:36:24,589 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 922mS.
+2022-05-07 00:36:24,590 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 1mS.
+2022-05-07 00:36:24,594 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.

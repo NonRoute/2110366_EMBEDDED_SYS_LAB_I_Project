@@ -13353,3 +13353,2238 @@ Finished building: default.size.stdout
  
 Finished building: Final_Project.list
  
+00:08:06 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:200:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  200 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c:204:21: error: 'true' undeclared (first use in this function)
+  204 |  int IC_ColorMode = true;
+      |                     ^~~~
+../Core/Src/main.c:204:21: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:225:3: error: 'Output_Color' undeclared (first use in this function)
+  225 |   Output_Color = (255.0 / (MAX_RED - MIN_RED)) * (FreqColor - MIN_RED); //MAPEAR FUNCIÓN
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c:194:6: warning: unused variable 'calibrate_number' [-Wunused-variable]
+  194 |  int calibrate_number = 0;
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:250:6: warning: implicit declaration of function 'TIM_GetITStatus' [-Wimplicit-function-declaration]
+  250 |  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:252:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  252 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:254:8: error: 'IC_ColorMode' undeclared (first use in this function)
+  254 |   if ((IC_ColorMode == true) && (calibrate_number == 0)) {
+      |        ^~~~~~~~~~~~
+../Core/Src/main.c:254:24: error: 'true' undeclared (first use in this function)
+  254 |   if ((IC_ColorMode == true) && (calibrate_number == 0)) {
+      |                        ^~~~
+../Core/Src/main.c:254:34: error: 'calibrate_number' undeclared (first use in this function)
+  254 |   if ((IC_ColorMode == true) && (calibrate_number == 0)) {
+      |                                  ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:255:4: error: 'TimeColor_L' undeclared (first use in this function)
+  255 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:255:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  255 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c:258:4: error: 'TimeColor_H' undeclared (first use in this function)
+  258 |    TimeColor_H = TIM_GetCapture3(TIM3);
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:259:19: error: 'false' undeclared (first use in this function)
+  259 |    IC_ColorMode = false;
+      |                   ^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:340:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  340 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:340:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:340:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  340 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:341:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  341 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:341:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:341:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  341 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:245:1: warning: control reaches end of non-void function [-Wreturn-type]
+  245 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:09:07 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:194:20: error: 'true' undeclared here (not in a function)
+  194 | int IC_ColorMode = true;
+      |                    ^~~~
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c:227:3: error: 'Output_Color' undeclared (first use in this function)
+  227 |   Output_Color = (255.0 / (MAX_RED - MIN_RED)) * (FreqColor - MIN_RED); //MAPEAR FUNCIÓN
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c:227:3: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:6: warning: implicit declaration of function 'TIM_GetITStatus' [-Wimplicit-function-declaration]
+  252 |  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c:261:19: error: 'false' undeclared (first use in this function)
+  261 |    IC_ColorMode = false;
+      |                   ^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:247:1: warning: control reaches end of non-void function [-Wreturn-type]
+  247 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:09:17 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c:227:3: error: 'Output_Color' undeclared (first use in this function)
+  227 |   Output_Color = (255.0 / (MAX_RED - MIN_RED)) * (FreqColor - MIN_RED); //MAPEAR FUNCIÓN
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c:227:3: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:6: warning: implicit declaration of function 'TIM_GetITStatus' [-Wimplicit-function-declaration]
+  252 |  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:256:24: error: 'true' undeclared (first use in this function)
+  256 |   if ((IC_ColorMode == true) && (calibrate_number == 0)) {
+      |                        ^~~~
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c:261:19: error: 'false' undeclared (first use in this function)
+  261 |    IC_ColorMode = false;
+      |                   ^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:247:1: warning: control reaches end of non-void function [-Wreturn-type]
+  247 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:09:39 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:6: warning: implicit declaration of function 'TIM_GetITStatus' [-Wimplicit-function-declaration]
+  252 |  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:256:24: error: 'true' undeclared (first use in this function)
+  256 |   if ((IC_ColorMode == true) && (calibrate_number == 0)) {
+      |                        ^~~~
+../Core/Src/main.c:256:24: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c:261:19: error: 'false' undeclared (first use in this function)
+  261 |    IC_ColorMode = false;
+      |                   ^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:09:51 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:6: warning: implicit declaration of function 'TIM_GetITStatus' [-Wimplicit-function-declaration]
+  252 |  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c:259:31: error: 'true' undeclared (first use in this function)
+  259 |   } else if ((IC_ColorMode == true) && (calibrate_number == 1)) {
+      |                               ^~~~
+../Core/Src/main.c:259:31: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:09:56 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:6: warning: implicit declaration of function 'TIM_GetITStatus' [-Wimplicit-function-declaration]
+  252 |  if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/stm32f4xx_it.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/stm32f4xx_it.c:205: multiple definition of `TIM3_IRQHandler'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:249: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:252: undefined reference to `TIM_GetITStatus'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:254: undefined reference to `TIM_ClearITPendingBit'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:257: undefined reference to `TIM_GetCapture3'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:260: undefined reference to `TIM_GetCapture3'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: Final_Project.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:11:03 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:6: warning: implicit declaration of function 'HAL_TIM_GetITStatus' [-Wimplicit-function-declaration]
+  252 |  if (HAL_TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
+      |      ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/stm32f4xx_it.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/stm32f4xx_it.c:205: multiple definition of `TIM3_IRQHandler'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:249: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:252: undefined reference to `HAL_TIM_GetITStatus'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:254: undefined reference to `TIM_ClearITPendingBit'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:257: undefined reference to `TIM_GetCapture3'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:260: undefined reference to `TIM_GetCapture3'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: Final_Project.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:11:58 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'GetColor':
+../Core/Src/main.c:202:2: warning: implicit declaration of function 'TIM_ITConfig'; did you mean 'TIM_ETR_SetConfig'? [-Wimplicit-function-declaration]
+  202 |  TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE); //Enable interruption
+      |  ^~~~~~~~~~~~
+      |  TIM_ETR_SetConfig
+../Core/Src/main.c: In function 'TIM3_IRQHandler':
+../Core/Src/main.c:252:44: warning: comparison between 'HAL_TIM_ChannelStateTypeDef' and 'enum <anonymous>' [-Wenum-compare]
+  252 |  if (HAL_TIMEx_GetChannelNState(&htim3, 3) != RESET) {
+      |                                            ^~
+../Core/Src/main.c:254:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
+  254 |   TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:257:18: warning: implicit declaration of function 'TIM_GetCapture3' [-Wimplicit-function-declaration]
+  257 |    TimeColor_L = TIM_GetCapture3(TIM3);
+      |                  ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:342:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:342:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  342 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:343:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:343:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:343:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  343 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/stm32f4xx_it.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/stm32f4xx_it.c:205: multiple definition of `TIM3_IRQHandler'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:249: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:254: undefined reference to `TIM_ClearITPendingBit'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:257: undefined reference to `TIM_GetCapture3'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:260: undefined reference to `TIM_GetCapture3'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: Final_Project.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:11:59 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/stm32f4xx_it.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/stm32f4xx_it.c:205: multiple definition of `TIM3_IRQHandler'; ./Core/Src/main.o:D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:249: first defined here
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o: in function `TIM3_IRQHandler':
+D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:254: undefined reference to `TIM_ClearITPendingBit'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:257: undefined reference to `TIM_GetCapture3'
+c:\st\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\bin\ld.exe: D:/OneDrive/University/year_2/semester_2/2110366_EMBEDDED_SYS_LAB_I/Project/Repository/2110366_EMBEDDED_SYS_LAB_I_Project/STM32_Project/Final_Project/Debug/../Core/Src/main.c:260: undefined reference to `TIM_GetCapture3'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: Final_Project.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:13:33 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:112:12: error: 'set_color' undeclared (first use in this function)
+  112 |    switch (set_color) {
+      |            ^~~~~~~~~
+../Core/Src/main.c:112:12: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:113:9: error: 'Red' undeclared (first use in this function)
+  113 |    case Red:
+      |         ^~~
+../Core/Src/main.c:115:10: error: 'FreqColor' undeclared (first use in this function)
+  115 |       * (FreqColor - MIN_RED); //MAPEAR FUNCIÓN
+      |          ^~~~~~~~~
+../Core/Src/main.c:118:9: error: 'Green' undeclared (first use in this function)
+  118 |    case Green:
+      |         ^~~~~
+../Core/Src/main.c:123:9: error: 'Blue' undeclared (first use in this function)
+  123 |    case Blue:
+      |         ^~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:261:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  261 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:261:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:261:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  261 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:262:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  262 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:262:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:262:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  262 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:14:01 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:112:12: error: 'set_color' undeclared (first use in this function)
+  112 |    switch (set_color) {
+      |            ^~~~~~~~~
+../Core/Src/main.c:112:12: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:113:9: error: 'Red' undeclared (first use in this function)
+  113 |    case Red:
+      |         ^~~
+../Core/Src/main.c:118:9: error: 'Green' undeclared (first use in this function)
+  118 |    case Green:
+      |         ^~~~~
+../Core/Src/main.c:123:9: error: 'Blue' undeclared (first use in this function)
+  123 |    case Blue:
+      |         ^~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:261:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  261 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:261:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:261:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  261 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:262:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  262 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:262:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:262:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  262 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:14:45 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:85:1: warning: data definition has no type or storage class
+   85 | set_color = Green;
+      | ^~~~~~~~~
+../Core/Src/main.c:85:1: warning: type defaults to 'int' in declaration of 'set_color' [-Wimplicit-int]
+../Core/Src/main.c:85:13: error: 'Green' undeclared here (not in a function)
+   85 | set_color = Green;
+      |             ^~~~~
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:115:9: error: 'Red' undeclared (first use in this function)
+  115 |    case Red:
+      |         ^~~
+../Core/Src/main.c:115:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:125:9: error: 'Blue' undeclared (first use in this function)
+  125 |    case Blue:
+      |         ^~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:263:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  263 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:263:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:263:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  263 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:264:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  264 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:264:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:264:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  264 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:15:33 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  265 |   sprintf(buffer, "%d \r\n", frequency);
+      |   ^~~~~~~
+../Core/Src/main.c:265:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:265:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  265 |   sprintf(buffer, "%d \r\n", frequency);
+      |                    ~^        ~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:266:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:266:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:266:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19696	    120	   1824	  21640	   5488	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:16:00 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  265 |   sprintf(buffer, "%d \r\n", Output_Color);
+      |   ^~~~~~~
+../Core/Src/main.c:265:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:265:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  265 |   sprintf(buffer, "%d \r\n", Output_Color);
+      |                    ~^        ~~~~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:266:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:266:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:266:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19696	    120	   1824	  21640	   5488	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:17:37 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  265 |   sprintf(buffer, "%d \r\n", Output_Color);
+      |   ^~~~~~~
+../Core/Src/main.c:265:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:265:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  265 |   sprintf(buffer, "%d \r\n", Output_Color);
+      |                    ~^        ~~~~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:266:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:266:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:266:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19696	    120	   1824	  21640	   5488	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:18:31 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  265 |   sprintf(buffer, "%d \r\n", Output_Color);
+      |   ^~~~~~~
+../Core/Src/main.c:265:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:265:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  265 |   sprintf(buffer, "%d \r\n", Output_Color);
+      |                    ~^        ~~~~~~~~~~~~
+      |                     |        |
+      |                     int      double
+      |                    %f
+../Core/Src/main.c:266:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                       ^~~~~~
+../Core/Src/main.c:266:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:266:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  266 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                              ^~~~~~~
+      |                              |
+      |                              char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19696	    120	   1824	  21640	   5488	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:19:19 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19616	    120	   1824	  21560	   5438	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:23:20 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19616	    120	   1824	  21560	   5438	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:25:01 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19612	    120	   1824	  21556	   5434	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:25:27 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19612	    120	   1824	  21556	   5434	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:25:46 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19616	    120	   1824	  21560	   5438	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:26:14 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19616	    120	   1824	  21560	   5438	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:26:33 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:145:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:145:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  145 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:146:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:146:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:146:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  146 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:151:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  151 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:170:1: warning: control reaches end of non-void function [-Wreturn-type]
+  170 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  19616	    120	   1824	  21560	   5438	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:36:29 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:226:21: error: 'htim2' undeclared (first use in this function); did you mean 'htim3'?
+  226 |  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+      |                     ^~~~~
+      |                     htim3
+../Core/Src/main.c:226:21: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:36:42 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:37:22 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:37:40 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:38:58 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:39:39 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:40:05 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:142:22: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
+  142 |    sprintf(buffer, "%d \r\n", Output_Color);
+      |                     ~^        ~~~~~~~~~~~~
+      |                      |        |
+      |                      int      double
+      |                     %f
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:42:01 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:142:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  142 |    sprintf(buffer, "%f \r\n", Output_Color);
+      |    ^~~~~~~
+../Core/Src/main.c:142:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:143:40: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                                        ^~~~~~
+../Core/Src/main.c:143:40: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:143:31: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |    HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+      |                               ^~~~~~~
+      |                               |
+      |                               char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:148:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  148 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+  167 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  17496	    120	   1752	  19368	   4ba8	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:45:20 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  29036	    484	   1756	  31276	   7a2c	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:50:55 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:87:1: error: unknown type name 'Filter'; use 'enum' keyword to refer to the type
+   87 | Filter set_color;
+      | ^~~~~~
+      | enum 
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:5: error: a label can only be part of a statement and a declaration is not a statement
+  145 |     char buffer[20];
+      |     ^~~~
+../Core/Src/main.c:146:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  146 |     sprintf(buffer, "Red = %f \r\n", Output_Color);
+      |     ^~~~~~~
+../Core/Src/main.c:146:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:147:41: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                         ^~~~~~
+../Core/Src/main.c:147:41: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:147:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:151:5: error: a label can only be part of a statement and a declaration is not a statement
+  151 |     char buffer[20];
+      |     ^~~~
+../Core/Src/main.c:151:10: error: redeclaration of 'buffer' with no linkage
+  151 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:145:10: note: previous declaration of 'buffer' was here
+  145 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:153:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  153 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:157:5: error: a label can only be part of a statement and a declaration is not a statement
+  157 |     char buffer[20];
+      |     ^~~~
+../Core/Src/main.c:157:10: error: redeclaration of 'buffer' with no linkage
+  157 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:151:10: note: previous declaration of 'buffer' was here
+  151 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:159:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  159 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:166:2: warning: implicit declaration of function 'Set_Scaling' [-Wimplicit-function-declaration]
+  166 |  Set_Scaling(int mode) {
+      |  ^~~~~~~~~~~
+../Core/Src/main.c:166:14: error: expected expression before 'int'
+  166 |  Set_Scaling(int mode) {
+      |              ^~~
+../Core/Src/main.c:166:23: error: expected ';' before '{' token
+  166 |  Set_Scaling(int mode) {
+      |                       ^~
+      |                       ;
+../Core/Src/main.c:477:2: error: expected declaration or statement at end of input
+  477 |  }
+      |  ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:54:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   54 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:55:13: warning: 'MX_USART2_UART_Init' declared 'static' but never defined [-Wunused-function]
+   55 | static void MX_USART2_UART_Init(void);
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:56:13: warning: 'MX_TIM3_Init' declared 'static' but never defined [-Wunused-function]
+   56 | static void MX_TIM3_Init(void);
+      |             ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:51:10 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:87:1: error: unknown type name 'Filter'; use 'enum' keyword to refer to the type
+   87 | Filter set_color;
+      | ^~~~~~
+      | enum 
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:145:5: error: a label can only be part of a statement and a declaration is not a statement
+  145 |     char buffer[20];
+      |     ^~~~
+../Core/Src/main.c:146:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  146 |     sprintf(buffer, "Red = %f \r\n", Output_Color);
+      |     ^~~~~~~
+../Core/Src/main.c:146:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:147:41: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                         ^~~~~~
+../Core/Src/main.c:147:41: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:147:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:151:5: error: a label can only be part of a statement and a declaration is not a statement
+  151 |     char buffer[20];
+      |     ^~~~
+../Core/Src/main.c:151:10: error: redeclaration of 'buffer' with no linkage
+  151 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:145:10: note: previous declaration of 'buffer' was here
+  145 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:153:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  153 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:157:5: error: a label can only be part of a statement and a declaration is not a statement
+  157 |     char buffer[20];
+      |     ^~~~
+../Core/Src/main.c:157:10: error: redeclaration of 'buffer' with no linkage
+  157 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:151:10: note: previous declaration of 'buffer' was here
+  151 |     char buffer[20];
+      |          ^~~~~~
+../Core/Src/main.c:159:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  159 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:167:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  167 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:186:1: warning: control reaches end of non-void function [-Wreturn-type]
+  186 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:51:30 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:87:1: error: unknown type name 'Filter'; use 'enum' keyword to refer to the type
+   87 | Filter set_color;
+      | ^~~~~~
+      | enum 
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:146:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  146 |     sprintf(buffer, "Red = %f \r\n", Output_Color);
+      |     ^~~~~~~
+../Core/Src/main.c:146:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:147:41: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                         ^~~~~~
+../Core/Src/main.c:147:41: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:147:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:152:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  152 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:157:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  157 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:165:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  165 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+  184 | }
+      | ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+00:51:44 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:146:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  146 |     sprintf(buffer, "Red = %f \r\n", Output_Color);
+      |     ^~~~~~~
+../Core/Src/main.c:146:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:147:41: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                         ^~~~~~
+../Core/Src/main.c:147:41: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:147:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:152:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  152 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:157:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  157 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:165:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  165 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+  184 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  29484	    484	   1756	  31724	   7bec	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 
+00:52:54 **** Incremental Build of configuration Debug for project Final_Project ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:146:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  146 |     sprintf(buffer, "Red = %f \r\n", Output_Color);
+      |     ^~~~~~~
+../Core/Src/main.c:146:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   20 | #include "main.h"
+  +++ |+#include <stdio.h>
+   21 | 
+../Core/Src/main.c:147:41: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                         ^~~~~~
+../Core/Src/main.c:147:41: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
+   20 | #include "main.h"
+  +++ |+#include <string.h>
+   21 | 
+../Core/Src/main.c:147:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:152:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  152 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:157:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  157 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:165:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  165 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+  184 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Final_Project.elf
+ 
+arm-none-eabi-size   Final_Project.elf 
+arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
+   text	   data	    bss	    dec	    hex	filename
+  29492	    484	   1756	  31732	   7bf4	Final_Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Final_Project.list
+ 

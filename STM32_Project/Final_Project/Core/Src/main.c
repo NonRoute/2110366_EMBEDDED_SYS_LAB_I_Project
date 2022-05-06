@@ -41,7 +41,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
@@ -55,7 +54,6 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM3_Init(void);
-static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -63,8 +61,22 @@ static void MX_TIM2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-#define TIMCLOCK 90000000
-#define PRESCALAR 84-1
+#define TIMCLOCK 84000000
+#define PRESCALAR 84
+#define MIN_RED 5000.0
+#define MAX_RED 16400.0
+#define MIN_GREEN 7000.0
+#define MAX_GREEN 11000.0
+#define MIN_BLUE 6000.0
+#define MAX_BLUE 10000.0
+
+enum Scaling {
+	Scl0, Scl2, Scl20, Scl100
+};
+
+enum Filter {
+	Red, Blue, Clear, Green
+};
 
 uint32_t IC_Val1 = 0;
 uint32_t IC_Val2 = 0;
@@ -72,7 +84,9 @@ uint32_t Difference = 0;
 int Is_First_Captured = 0;
 
 /* Measure Frequency */
+uint8_t set_color;
 float frequency = 0;
+float Output_Color = 0;
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3) {
@@ -86,7 +100,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 		{
 			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read second value
 
-			if (IC_Val2 > IC_Val1) {
+			if (IC_Val2 > IC_Val1) { //Avoid overflow
 				Difference = IC_Val2 - IC_Val1;
 			}
 
@@ -100,13 +114,55 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 
 			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
 			Is_First_Captured = 0; // set it back to false
+
+			//Freq to Color -> Depending of the filter
+			switch (set_color) {
+			case Red:
+				Output_Color = (255.0 / (MAX_RED - MIN_RED))
+						* (frequency - MIN_RED);
+				break;
+
+			case Green:
+				Output_Color = (255.0 / (MAX_GREEN - MIN_GREEN))
+						* (frequency - MIN_GREEN);
+				break;
+
+			case Blue:
+				Output_Color = (255.0 / (MAX_RED - MIN_BLUE))
+						* (frequency - MIN_BLUE);
+				break;
+			}
+
+			//Constrain Value to MaxRange
+			if (Output_Color > 255)
+				Output_Color = 255;
+			if (Output_Color < 0)
+				Output_Color = 0;
+
+			//print output
+			char buffer[20];
+			switch (set_color) {
+			case Red:
+				sprintf(buffer, "Red = %f \r\n", Output_Color);
+				HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+				HAL_MAX_DELAY);
+				break;
+			case Green:
+				sprintf(buffer, "Green = %f \r\n", Output_Color);
+				HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+				HAL_MAX_DELAY);
+				break;
+			case Blue:
+				sprintf(buffer, "Blue = %f \r\n", Output_Color);
+				HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+				HAL_MAX_DELAY);
+				break;
+			}
 		}
 	}
 }
-enum Scaling {
-	Scl0, Scl2, Scl20, Scl100
-};
-void Set_Scaling(int mode) {
+
+Set_Scaling(int mode) {
 	switch (mode) {
 	case (Scl0): //OUTPUT FREQUENCY SCALING = 0%
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
@@ -127,11 +183,9 @@ void Set_Scaling(int mode) {
 	}
 }
 
-enum Filter {
-	Red, Blue, Clear, Green
-};
 void Set_Filter(uint8_t mode) //Mode es de tipo enum Filtro
 {
+	set_color = mode;
 	switch (mode) {
 	case (Red):
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
@@ -183,15 +237,12 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_TIM3_Init();
-	MX_TIM2_Init();
 	/* USER CODE BEGIN 2 */
 
-	TIM2->CCR1 = 50;
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
 
-	Set_Scaling(Scl2);
-	Set_Filter(Blue);
+	Set_Scaling(Scl20);
+
 //	int undetected_time = 0;
 //	const int detected_delay = 20;
 //	int is_detected = 0;
@@ -225,10 +276,12 @@ int main(void) {
 //			is_detected = 0;
 //		}
 //		HAL_Delay(1);
-		char buffer[20];
-		sprintf(buffer, "%d \r\n", frequency);
-		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-		HAL_Delay(10);
+		Set_Filter(Red);
+		HAL_Delay(1000);
+		Set_Filter(Green);
+		HAL_Delay(1000);
+		Set_Filter(Blue);
+		HAL_Delay(1000);
 	}
 	/* USER CODE END 3 */
 }
@@ -274,61 +327,6 @@ void SystemClock_Config(void) {
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
 		Error_Handler();
 	}
-}
-
-/**
- * @brief TIM2 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_TIM2_Init(void) {
-
-	/* USER CODE BEGIN TIM2_Init 0 */
-
-	/* USER CODE END TIM2_Init 0 */
-
-	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
-	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
-	TIM_OC_InitTypeDef sConfigOC = { 0 };
-
-	/* USER CODE BEGIN TIM2_Init 1 */
-
-	/* USER CODE END TIM2_Init 1 */
-	htim2.Instance = TIM2;
-	htim2.Init.Prescaler = 84 - 1;
-	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim2.Init.Period = 100 - 1;
-	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-	if (HAL_TIM_Base_Init(&htim2) != HAL_OK) {
-		Error_Handler();
-	}
-	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-	if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK) {
-		Error_Handler();
-	}
-	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK) {
-		Error_Handler();
-	}
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 0;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	/* USER CODE BEGIN TIM2_Init 2 */
-
-	/* USER CODE END TIM2_Init 2 */
-	HAL_TIM_MspPostInit(&htim2);
-
 }
 
 /**
@@ -433,8 +431,8 @@ static void MX_GPIO_Init(void) {
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4,
-			GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB,
+	GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : B1_Pin */
 	GPIO_InitStruct.Pin = B1_Pin;

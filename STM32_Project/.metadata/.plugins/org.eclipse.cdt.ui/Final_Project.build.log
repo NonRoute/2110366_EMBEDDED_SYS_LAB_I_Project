@@ -1,34 +1,28 @@
-23:53:01 **** Incremental Build of configuration Debug for project Final_Project ****
+00:52:54 **** Incremental Build of configuration Debug for project Final_Project ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:229:3: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
-  229 |   sprintf(buffer, "%d \r\n", frequency);
-      |   ^~~~~~~
-../Core/Src/main.c:229:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+../Core/Src/main.c:146:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  146 |     sprintf(buffer, "Red = %f \r\n", Output_Color);
+      |     ^~~~~~~
+../Core/Src/main.c:146:5: warning: incompatible implicit declaration of built-in function 'sprintf'
 ../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
    20 | #include "main.h"
   +++ |+#include <stdio.h>
    21 | 
-../Core/Src/main.c:229:21: warning: format '%d' expects argument of type 'int', but argument 3 has type 'double' [-Wformat=]
-  229 |   sprintf(buffer, "%d \r\n", frequency);
-      |                    ~^        ~~~~~~~~~
-      |                     |        |
-      |                     int      double
-      |                    %f
-../Core/Src/main.c:230:39: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
-  230 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-      |                                       ^~~~~~
-../Core/Src/main.c:230:39: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:147:41: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                         ^~~~~~
+../Core/Src/main.c:147:41: warning: incompatible implicit declaration of built-in function 'strlen'
 ../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
    20 | #include "main.h"
   +++ |+#include <string.h>
    21 | 
-../Core/Src/main.c:230:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
-  230 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-      |                              ^~~~~~~
-      |                              |
-      |                              char (*)[20]
+../Core/Src/main.c:147:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  147 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
 In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
                  from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
                  from ../Core/Inc/main.h:30,
@@ -36,17 +30,49 @@ In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
   722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
-arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+../Core/Src/main.c:152:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  152 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:157:32: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  157 |     HAL_UART_Transmit(&huart2, &buffer, strlen(buffer),
+      |                                ^~~~~~~
+      |                                |
+      |                                char (*)[20]
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char (*)[20]'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:165:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  165 | Set_Scaling(int mode) {
+      | ^~~~~~~~~~~
+../Core/Src/main.c: In function 'Set_Scaling':
+../Core/Src/main.c:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+  184 | }
+      | ^
+arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Final_Project.elf
  
 arm-none-eabi-size   Final_Project.elf 
 arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
    text	   data	    bss	    dec	    hex	filename
-  18788	    120	   1824	  20732	   50fc	Final_Project.elf
+  29492	    484	   1756	  31732	   7bf4	Final_Project.elf
 Finished building: default.size.stdout
  
 Finished building: Final_Project.list
  
 
-23:53:02 Build Finished. 0 errors, 6 warnings. (took 740ms)
+00:52:55 Build Finished. 0 errors, 9 warnings. (took 793ms)
 
