@@ -103,24 +103,51 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 		}
 	}
 }
-
+enum Scaling {
+	Scl0, Scl2, Scl20, Scl100
+};
 void Set_Scaling(int mode) {
 	switch (mode) {
-	case (0): //OUTPUT FREQUENCY SCALING = 0%
+	case (Scl0): //OUTPUT FREQUENCY SCALING = 0%
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //S1 L
 		break;
-	case (1): //2%
+	case (Scl2): //2%
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //S1 H
 		break;
-	case (2): //20%
+	case (Scl20): //20%
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //S0 H
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //S1 L
 		break;
-	case (3): //100%
+	case (Scl100): //100%
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //S0 H
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //S1 H
+		break;
+	}
+}
+
+enum Filter {
+	Red, Blue, Clear, Green
+};
+void Set_Filter(uint8_t mode) //Mode es de tipo enum Filtro
+{
+	switch (mode) {
+	case (Red):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S4 L
+		break;
+	case (Blue):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
+		break;
+	case (Clear):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S3 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S4 L
+		break;
+	case (Green):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S3 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
 		break;
 	}
 }
@@ -163,7 +190,8 @@ int main(void) {
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
 
-	Set_Scaling(1);
+	Set_Scaling(Scl2);
+	Set_Filter(Blue);
 //	int undetected_time = 0;
 //	const int detected_delay = 20;
 //	int is_detected = 0;
