@@ -3896,3 +3896,50 @@
 2022-05-06 17:56:12,606 [INFO] IPUIPlugin:75 - create IPUIPlugin
 2022-05-06 17:56:12,608 [INFO] ApiDbMcu:488 - Load IP Config File for PDM2PCM
 2022-05-06 17:56:12,665 [INFO] OpenFileManager:323 - Restore cursor
+2022-05-06 18:06:35,086 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-06 18:07:03,783 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-06 18:07:11,134 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-06 18:07:50,255 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-06 18:08:45,437 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 718389768 Bytes (877658112)
+2022-05-06 18:08:46,243 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 747227656 Bytes (877658112)
+2022-05-06 18:08:46,555 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 288635424 Bytes (877658112)
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-05-06 18:08:46,665 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-05-06 18:08:46,666 [INFO] CodeGenerator:681 - code generatio: config db path: C:\ST\STM32CubeIDE_1.9.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\
+2022-05-06 18:08:46,789 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp_save
+2022-05-06 18:08:46,849 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\license.tmp
+2022-05-06 18:08:46,868 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp_save
+2022-05-06 18:08:46,926 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\gpio.tmp
+2022-05-06 18:08:46,984 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c_save
+2022-05-06 18:08:47,039 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_it.c
+2022-05-06 18:08:47,046 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h_save
+2022-05-06 18:08:47,101 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_it.h
+2022-05-06 18:08:47,117 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c_save
+2022-05-06 18:08:47,199 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\stm32f4xx_hal_msp.c
+2022-05-06 18:08:47,205 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp_save
+2022-05-06 18:08:47,249 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\MXTmpFiles\system.tmp
+2022-05-06 18:08:47,263 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h_save
+2022-05-06 18:08:47,334 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\stm32f4xx_hal_conf.h
+2022-05-06 18:08:47,347 [WARN] IPConfigManager:3312 - IP not found : TIM
+2022-05-06 18:08:47,348 [WARN] CodeGenerator:3483 - IP not found : null
+2022-05-06 18:08:47,357 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h_save
+2022-05-06 18:08:47,420 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Inc\main.h
+2022-05-06 18:08:47,429 [INFO] CodeEngine:237 - oldGeneratedFile, D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c_save
+2022-05-06 18:08:47,515 [INFO] CodeEngine:261 - Generated code: D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\Core\Src\main.c
+2022-05-06 18:08:48,105 [INFO] ProjectBuilder:2913 - Time for Copy HAL[1] : 224mS.
+2022-05-06 18:08:48,110 [INFO] ProjectBuilder:4015 - Project Generator version: 3.16.0
+2022-05-06 18:08:48,242 [INFO] ConfigFileManager:1287 - The Die is : DIE431
+2022-05-06 18:08:48,243 [INFO] ApiDbMcu:488 - Load IP Config File for FATFS
+2022-05-06 18:08:48,245 [INFO] ApiDbMcu:488 - Load IP Config File for FREERTOS
+2022-05-06 18:08:48,246 [INFO] ApiDbMcu:488 - Load IP Config File for LIBJPEG
+2022-05-06 18:08:48,248 [INFO] ApiDbMcu:488 - Load IP Config File for MBEDTLS
+2022-05-06 18:08:48,251 [INFO] ApiDbMcu:488 - Load IP Config File for USB_DEVICE
+2022-05-06 18:08:48,252 [INFO] ApiDbMcu:488 - Load IP Config File for USB_HOST
+2022-05-06 18:08:49,104 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 994mS.
+2022-05-06 18:08:49,105 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 1mS.
+2022-05-06 18:08:49,110 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
