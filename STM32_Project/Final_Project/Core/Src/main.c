@@ -104,6 +104,26 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	}
 }
 
+void Set_Scaling(int mode) {
+	switch (mode) {
+	case (0): //OUTPUT FREQUENCY SCALING = 0%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //S1 L
+		break;
+	case (1): //2%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //S1 H
+		break;
+	case (2): //20%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //S0 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //S1 L
+		break;
+	case (3): //100%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //S0 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //S1 H
+		break;
+	}
+}
 
 /* USER CODE END 0 */
 
@@ -142,6 +162,8 @@ int main(void) {
 	TIM2->CCR1 = 50;
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
+
+	Set_Scaling(1);
 //	int undetected_time = 0;
 //	const int detected_delay = 20;
 //	int is_detected = 0;
@@ -175,6 +197,10 @@ int main(void) {
 //			is_detected = 0;
 //		}
 //		HAL_Delay(1);
+		char buffer[20];
+		sprintf(buffer, "%d \r\n", frequency);
+		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+		HAL_Delay(10);
 	}
 	/* USER CODE END 3 */
 }
@@ -320,7 +346,7 @@ static void MX_TIM3_Init(void) {
 	sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
 	sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
 	sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
-	sConfigIC.ICFilter = 0;
+	sConfigIC.ICFilter = 5;
 	if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_3) != HAL_OK) {
 		Error_Handler();
 	}
@@ -379,8 +405,8 @@ static void MX_GPIO_Init(void) {
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOB,
-	GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4,
+			GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : B1_Pin */
 	GPIO_InitStruct.Pin = B1_Pin;
