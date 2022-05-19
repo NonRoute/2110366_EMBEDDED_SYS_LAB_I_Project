@@ -65,8 +65,8 @@ static void MX_TIM3_Init(void);
 #define PRESCALAR 84
 
 //value for color calibration
-#define MIN_RED 4000.0 //5000.0
-#define MAX_RED 27000.0 //16400.0
+#define MIN_RED 4000.0 //5000.0 //frequency when R = 0
+#define MAX_RED 27000.0 //16400.0 //frequency when R = 255
 #define MIN_GREEN 3100 //7000.0
 #define MAX_GREEN 16000.0 //11000.0
 #define MIN_BLUE 3800.0 //6000.0
@@ -92,6 +92,7 @@ float frequency = 0; //update when interrupt
 float Output_Color = 0; //update when interrupt
 
 float RGB[3]; //Array [Red, Green, Blue]
+float sum_frequency = 0; //for calculate avg. freq.
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3) {
@@ -195,29 +196,36 @@ void Set_Filter(uint8_t mode) //Mode es de tipo enum Filtro
 
 void Print_Output() { //print RGB value
 	char buffer[100];
-	sprintf(buffer, "Red = %f \r\n", RGB[0]);
+	sprintf(buffer, "Red = %d \r\n", (int) RGB[0]);
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-	sprintf(buffer, "Green = %f \r\n", RGB[1]);
+	sprintf(buffer, "Green = %d \r\n", (int) RGB[1]);
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-	sprintf(buffer, "Blue = %f \r\n", RGB[2]);
+	sprintf(buffer, "Blue = %d \r\n", (int) RGB[2]);
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-
 }
 
-void Print_Frequency() { //used for color calibration
+void Print_Frequency(uint8_t set_color) { //used for color calibration
 	char buffer[100];
-	sprintf(buffer, "frequency = %f \r\n", frequency);
+	switch (set_color) {
+	case Red:
+		sprintf(buffer, "Red = %f frequency = %f \r\n", RGB[0], sum_frequency);
+		break;
+	case Green:
+		sprintf(buffer, "Green = %f frequency = %f \r\n", RGB[1],
+				sum_frequency);
+		break;
+	case Blue:
+		sprintf(buffer, "Blue = %f frequency = %f \r\n", RGB[2], sum_frequency);
+		break;
+	}
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
-float GetColor(uint8_t set_color) {
+float GetColor(uint8_t set_color) { //change reading color, get color from interrupt
 	Set_Filter(set_color);
 	wait_for_callback = 1;
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3); //start interrupt
 	while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
-		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-		HAL_Delay(1);
-
 	}
 	HAL_TIM_IC_Stop_IT(&htim3, TIM_CHANNEL_3); //stop interrupt
 	return Output_Color;
@@ -238,10 +246,53 @@ void ReadColor(int read_times) { //read color value for 'read_times' times and c
 	RGB[1] /= read_times;
 
 	RGB[2] = 0;
+	sum_frequency = 0;
 	for (int i = 0; i < read_times; i++) {
 		RGB[2] += GetColor(Blue);
 	}
 	RGB[2] /= read_times;
+
+}
+
+void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibration
+
+	while (1) {
+		RGB[0] = 0;
+		sum_frequency = 0;
+		for (int i = 0; i < read_times; i++) {
+			RGB[0] += GetColor(Red);
+			sum_frequency += frequency;
+		}
+		RGB[0] /= read_times;
+		sum_frequency /= read_times;
+		Print_Frequency(Red);
+
+		RGB[1] = 0;
+		sum_frequency = 0;
+		for (int i = 0; i < read_times; i++) {
+			RGB[1] += GetColor(Green);
+			sum_frequency += frequency;
+		}
+		RGB[1] /= read_times;
+		sum_frequency /= read_times;
+		Print_Frequency(Green);
+
+		RGB[2] = 0;
+		sum_frequency = 0;
+		for (int i = 0; i < read_times; i++) {
+			RGB[2] += GetColor(Blue);
+			sum_frequency += frequency;
+		}
+		RGB[2] /= read_times;
+		sum_frequency /= read_times;
+		Print_Frequency(Blue);
+
+		char buffer[100];
+		sprintf(buffer, "-------------------Sensor Calibration-----------------\r\n");
+		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+
+		HAL_Delay(delay);
+	}
 
 }
 
@@ -289,6 +340,7 @@ int main(void) {
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
 
+	ReadColorWithFrequency(100,1000); //for sensor calibration
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -307,7 +359,8 @@ int main(void) {
 					clapCount = 1;
 				if (clapCount >= 3) {
 					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //toggle LED
-					ReadColor(10); //read color
+//					ReadColor(10); //read color
+
 					Print_Output(); //send color's value
 
 					clapCount = 0;
@@ -320,7 +373,7 @@ int main(void) {
 			undetected_time++;
 			is_detected = 0;
 		}
-		HAL_Delay(1);
+		HAL_Delay(1); //delay 1 ms
 	}
 	/* USER CODE END 3 */
 }
