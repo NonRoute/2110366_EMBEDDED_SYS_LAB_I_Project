@@ -4481,3 +4481,13 @@
 2022-05-07 00:36:24,590 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 1mS.
 2022-05-07 00:36:24,594 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
 2022-05-07 01:05:41,839 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,659x347,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-05-19 20:57:15,926 [INFO] Activator:177 - 
+
+
+2022-05-19 20:57:15,928 [INFO] Activator:178 - !SESSION log4j initialized
+2022-05-19 20:57:20,681 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-05-19 21:51:12,580 [INFO] Activator:177 - 
+
+
+2022-05-19 21:51:12,582 [INFO] Activator:178 - !SESSION log4j initialized
+2022-05-19 21:51:16,579 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

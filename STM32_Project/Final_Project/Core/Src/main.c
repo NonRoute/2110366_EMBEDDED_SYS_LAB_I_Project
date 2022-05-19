@@ -63,12 +63,14 @@ static void MX_TIM3_Init(void);
 
 #define TIMCLOCK 84000000
 #define PRESCALAR 84
-#define MIN_RED 5000.0
-#define MAX_RED 16400.0
-#define MIN_GREEN 7000.0
-#define MAX_GREEN 11000.0
-#define MIN_BLUE 6000.0
-#define MAX_BLUE 10000.0
+
+//value for color calibration
+#define MIN_RED 4000.0 //5000.0
+#define MAX_RED 27000.0 //16400.0
+#define MIN_GREEN 3100 //7000.0
+#define MAX_GREEN 16000.0 //11000.0
+#define MIN_BLUE 3800.0 //6000.0
+#define MAX_BLUE 20000.0 //10000.0
 
 enum Scaling {
 	Scl0, Scl2, Scl20, Scl100
@@ -86,8 +88,10 @@ int Is_First_Captured = 0;
 
 uint8_t set_color;
 int wait_for_callback = 0;
-float frequency = 0;
-float Output_Color = 0;
+float frequency = 0; //update when interrupt
+float Output_Color = 0; //update when interrupt
+
+float RGB[3]; //Array [Red, Green, Blue]
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3) {
@@ -129,7 +133,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 				break;
 
 			case Blue:
-				Output_Color = (255.0 / (MAX_RED - MIN_BLUE))
+				Output_Color = (255.0 / (MAX_BLUE - MIN_BLUE))
 						* (frequency - MIN_BLUE);
 				break;
 			}
@@ -189,33 +193,56 @@ void Set_Filter(uint8_t mode) //Mode es de tipo enum Filtro
 	}
 }
 
-void Print_Output(uint8_t set_color) {
-	char buffer[20];
-	switch (set_color) {
-	case Red:
-		sprintf(buffer, "Red = %f \r\n", Output_Color);
-		break;
-	case Green:
-		sprintf(buffer, "Green = %f \r\n", Output_Color);
-		break;
-	case Blue:
-		sprintf(buffer, "Blue = %f \r\n", Output_Color);
-		break;
-	}
+void Print_Output() { //print RGB value
+	char buffer[100];
+	sprintf(buffer, "Red = %f \r\n", RGB[0]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	sprintf(buffer, "Green = %f \r\n", RGB[1]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	sprintf(buffer, "Blue = %f \r\n", RGB[2]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+
+}
+
+void Print_Frequency() { //used for color calibration
+	char buffer[100];
+	sprintf(buffer, "frequency = %f \r\n", frequency);
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
-void GetColor(uint8_t set_color) {
+float GetColor(uint8_t set_color) {
 	Set_Filter(set_color);
 	wait_for_callback = 1;
-	HAL_TIM_IC_Start_IT(&htim3, 3);
+	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3); //start interrupt
 	while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
 		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 		HAL_Delay(1);
 
 	}
-	HAL_TIM_IC_Start_IT(&htim3, 3);
-	Print_Output(set_color);
+	HAL_TIM_IC_Stop_IT(&htim3, TIM_CHANNEL_3); //stop interrupt
+	return Output_Color;
+}
+
+void ReadColor(int read_times) { //read color value for 'read_times' times and calculate average value
+
+	RGB[0] = 0;
+	for (int i = 0; i < read_times; i++) {
+		RGB[0] += GetColor(Red);
+	}
+	RGB[0] /= read_times;
+
+	RGB[1] = 0;
+	for (int i = 0; i < read_times; i++) {
+		RGB[1] += GetColor(Green);
+	}
+	RGB[1] /= read_times;
+
+	RGB[2] = 0;
+	for (int i = 0; i < read_times; i++) {
+		RGB[2] += GetColor(Blue);
+	}
+	RGB[2] /= read_times;
+
 }
 
 /* USER CODE END 0 */
@@ -288,36 +315,9 @@ int main(void) {
 //			is_detected = 0;
 //		}
 //		HAL_Delay(1);
-//		GetColor(Red);
-		Set_Filter(Red);
-		wait_for_callback = 1;
-		HAL_TIM_IC_Start_IT(&htim3, 3);
-		while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
-		}
-		HAL_TIM_IC_Start_IT(&htim3, 3);
-		Print_Output(Red);
-		HAL_Delay(300);
-
-		Set_Filter(Green);
-		wait_for_callback = 1;
-		HAL_TIM_IC_Start_IT(&htim3, 3);
-		while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
-
-		}
-		HAL_TIM_IC_Start_IT(&htim3, 3);
-		Print_Output(Green);
-		HAL_Delay(300);
-
-		Set_Filter(Blue);
-		wait_for_callback = 1;
-		HAL_TIM_IC_Start_IT(&htim3, 3);
-		while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
-
-		}
-		HAL_TIM_IC_Start_IT(&htim3, 3);
-		Print_Output(Blue);
-		HAL_Delay(300);
-
+		ReadColor(10);
+		Print_Output();
+		HAL_Delay(750);
 	}
 	/* USER CODE END 3 */
 }
