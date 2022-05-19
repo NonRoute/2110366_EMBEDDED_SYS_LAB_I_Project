@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+//#include <stdbool.h>
+#define VIRTUALIZAR_SENSOR 0
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -39,7 +41,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
+TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
 
@@ -51,13 +53,248 @@ UART_HandleTypeDef huart2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_ADC1_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+#define TIMCLOCK 84000000
+#define PRESCALAR 84
+
+//value for color calibration
+#define MIN_RED 4000.0 //5000.0 //frequency when R = 0
+#define MAX_RED 27000.0 //16400.0 //frequency when R = 255
+#define MIN_GREEN 3100 //7000.0
+#define MAX_GREEN 16000.0 //11000.0
+#define MIN_BLUE 3800.0 //6000.0
+#define MAX_BLUE 20000.0 //10000.0
+
+enum Scaling {
+	Scl0, Scl2, Scl20, Scl100
+};
+
+enum Filter {
+	Red, Blue, Clear, Green
+};
+
+/* Measure Frequency */
+uint32_t IC_Val1 = 0;
+uint32_t IC_Val2 = 0;
+uint32_t Difference = 0;
+int Is_First_Captured = 0;
+
+uint8_t set_color;
+int wait_for_callback = 0;
+float frequency = 0; //update when interrupt
+float Output_Color = 0; //update when interrupt
+
+float RGB[3]; //Array [Red, Green, Blue]
+float sum_frequency = 0; //for calculate avg. freq.
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
+	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3) {
+		if (Is_First_Captured == 0) // if the first rising edge is not captured
+				{
+			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read the first value
+			Is_First_Captured = 1;  // set the first captured as true
+		}
+
+		else // If the first rising edge is captured, now we will capture the second edge
+		{
+			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read second value
+
+			if (IC_Val2 > IC_Val1) { //Avoid overflow
+				Difference = IC_Val2 - IC_Val1;
+			}
+
+			else if (IC_Val1 > IC_Val2) {
+				Difference = (0xffffffff - IC_Val1) + IC_Val2;
+			}
+
+			float refClock = TIMCLOCK / (PRESCALAR);
+
+			frequency = refClock / Difference;
+
+			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
+			Is_First_Captured = 0; // set it back to false
+
+			//Freq to Color -> Depending of the filter
+			switch (set_color) {
+			case Red:
+				Output_Color = (255.0 / (MAX_RED - MIN_RED))
+						* (frequency - MIN_RED);
+				break;
+
+			case Green:
+				Output_Color = (255.0 / (MAX_GREEN - MIN_GREEN))
+						* (frequency - MIN_GREEN);
+				break;
+
+			case Blue:
+				Output_Color = (255.0 / (MAX_BLUE - MIN_BLUE))
+						* (frequency - MIN_BLUE);
+				break;
+			}
+
+			//Constrain Value to MaxRange
+			if (Output_Color > 255)
+				Output_Color = 255;
+			if (Output_Color < 0)
+				Output_Color = 0;
+
+			wait_for_callback = 0;
+		}
+	}
+}
+
+void Set_Scaling(int mode) {
+	switch (mode) {
+	case (Scl0): //OUTPUT FREQUENCY SCALING = 0%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //S1 L
+		break;
+	case (Scl2): //2%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 0); //S0 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //S1 H
+		break;
+	case (Scl20): //20%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //S0 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 0); //S1 L
+		break;
+	case (Scl100): //100%
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, 1); //S0 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, 1); //S1 H
+		break;
+	}
+}
+
+void Set_Filter(uint8_t mode) //Mode es de tipo enum Filtro
+{
+	set_color = mode;
+	switch (mode) {
+	case (Red):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S4 L
+		break;
+	case (Blue):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
+		break;
+	case (Clear):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S3 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S4 L
+		break;
+	case (Green):
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S3 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
+		break;
+	}
+}
+
+void Print_Output() { //print RGB value
+	char buffer[100];
+	sprintf(buffer, "Red = %d \r\n", (int) RGB[0]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	sprintf(buffer, "Green = %d \r\n", (int) RGB[1]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	sprintf(buffer, "Blue = %d \r\n", (int) RGB[2]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+}
+
+void Print_Frequency(uint8_t set_color) { //used for color calibration
+	char buffer[100];
+	switch (set_color) {
+	case Red:
+		sprintf(buffer, "Red = %f frequency = %f \r\n", RGB[0], sum_frequency);
+		break;
+	case Green:
+		sprintf(buffer, "Green = %f frequency = %f \r\n", RGB[1],
+				sum_frequency);
+		break;
+	case Blue:
+		sprintf(buffer, "Blue = %f frequency = %f \r\n", RGB[2], sum_frequency);
+		break;
+	}
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+}
+
+float GetColor(uint8_t set_color) { //change reading color, get color from interrupt
+	Set_Filter(set_color);
+	wait_for_callback = 1;
+	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3); //start interrupt
+	while (wait_for_callback == 1) { //Wait until value is get on the interrupt routine
+	}
+	HAL_TIM_IC_Stop_IT(&htim3, TIM_CHANNEL_3); //stop interrupt
+	return Output_Color;
+}
+
+void ReadColor(int read_times) { //read color value for 'read_times' times and calculate average value
+
+	RGB[0] = 0;
+	for (int i = 0; i < read_times; i++) {
+		RGB[0] += GetColor(Red);
+	}
+	RGB[0] /= read_times;
+
+	RGB[1] = 0;
+	for (int i = 0; i < read_times; i++) {
+		RGB[1] += GetColor(Green);
+	}
+	RGB[1] /= read_times;
+
+	RGB[2] = 0;
+	sum_frequency = 0;
+	for (int i = 0; i < read_times; i++) {
+		RGB[2] += GetColor(Blue);
+	}
+	RGB[2] /= read_times;
+
+}
+
+void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibration
+
+	while (1) {
+		RGB[0] = 0;
+		sum_frequency = 0;
+		for (int i = 0; i < read_times; i++) {
+			RGB[0] += GetColor(Red);
+			sum_frequency += frequency;
+		}
+		RGB[0] /= read_times;
+		sum_frequency /= read_times;
+		Print_Frequency(Red);
+
+		RGB[1] = 0;
+		sum_frequency = 0;
+		for (int i = 0; i < read_times; i++) {
+			RGB[1] += GetColor(Green);
+			sum_frequency += frequency;
+		}
+		RGB[1] /= read_times;
+		sum_frequency /= read_times;
+		Print_Frequency(Green);
+
+		RGB[2] = 0;
+		sum_frequency = 0;
+		for (int i = 0; i < read_times; i++) {
+			RGB[2] += GetColor(Blue);
+			sum_frequency += frequency;
+		}
+		RGB[2] /= read_times;
+		sum_frequency /= read_times;
+		Print_Frequency(Blue);
+
+		char buffer[100];
+		sprintf(buffer, "-------------------Sensor Calibration-----------------\r\n");
+		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+
+		HAL_Delay(delay);
+	}
+
+}
 
 /* USER CODE END 0 */
 
@@ -89,14 +326,21 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
-	MX_ADC1_Init();
+	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
+
+	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
+
+	Set_Scaling(Scl20);
+
 	int undetected_time = 0;
 	const int detected_delay = 20;
 	int is_detected = 0;
 	uint32_t lastClap = HAL_GetTick();
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
+
+	ReadColorWithFrequency(100,1000); //for sensor calibration
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -105,14 +349,20 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
+
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected Sound
+
 			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
 				if (HAL_GetTick() <= lastClap + timeBetweenClap)
 					clapCount += 1;
 				else
 					clapCount = 1;
 				if (clapCount >= 3) {
-					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
+					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //toggle LED
+//					ReadColor(10); //read color
+
+					Print_Output(); //send color's value
+
 					clapCount = 0;
 				}
 				lastClap = HAL_GetTick();
@@ -123,7 +373,7 @@ int main(void) {
 			undetected_time++;
 			is_detected = 0;
 		}
-		HAL_Delay(1);
+		HAL_Delay(1); //delay 1 ms
 	}
 	/* USER CODE END 3 */
 }
@@ -172,51 +422,55 @@ void SystemClock_Config(void) {
 }
 
 /**
- * @brief ADC1 Initialization Function
+ * @brief TIM3 Initialization Function
  * @param None
  * @retval None
  */
-static void MX_ADC1_Init(void) {
+static void MX_TIM3_Init(void) {
 
-	/* USER CODE BEGIN ADC1_Init 0 */
+	/* USER CODE BEGIN TIM3_Init 0 */
 
-	/* USER CODE END ADC1_Init 0 */
+	/* USER CODE END TIM3_Init 0 */
 
-	ADC_ChannelConfTypeDef sConfig = { 0 };
+	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
+	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
+	TIM_IC_InitTypeDef sConfigIC = { 0 };
 
-	/* USER CODE BEGIN ADC1_Init 1 */
+	/* USER CODE BEGIN TIM3_Init 1 */
 
-	/* USER CODE END ADC1_Init 1 */
-
-	/** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-	 */
-	hadc1.Instance = ADC1;
-	hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
-	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-	hadc1.Init.ScanConvMode = DISABLE;
-	hadc1.Init.ContinuousConvMode = DISABLE;
-	hadc1.Init.DiscontinuousConvMode = DISABLE;
-	hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-	hadc1.Init.NbrOfConversion = 1;
-	hadc1.Init.DMAContinuousRequests = DISABLE;
-	hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
+	/* USER CODE END TIM3_Init 1 */
+	htim3.Instance = TIM3;
+	htim3.Init.Prescaler = 84 - 1;
+	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim3.Init.Period = 20000 - 1;
+	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
 		Error_Handler();
 	}
-
-	/** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-	 */
-	sConfig.Channel = ADC_CHANNEL_10;
-	sConfig.Rank = 1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
+	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+	if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK) {
 		Error_Handler();
 	}
-	/* USER CODE BEGIN ADC1_Init 2 */
+	if (HAL_TIM_IC_Init(&htim3) != HAL_OK) {
+		Error_Handler();
+	}
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig)
+			!= HAL_OK) {
+		Error_Handler();
+	}
+	sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+	sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+	sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+	sConfigIC.ICFilter = 5;
+	if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_3) != HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN TIM3_Init 2 */
 
-	/* USER CODE END ADC1_Init 2 */
+	/* USER CODE END TIM3_Init 2 */
 
 }
 
@@ -268,11 +522,21 @@ static void MX_GPIO_Init(void) {
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
+	/*Configure GPIO pin Output Level */
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4,
+			GPIO_PIN_RESET);
+
 	/*Configure GPIO pin : B1_Pin */
 	GPIO_InitStruct.Pin = B1_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+
+	/*Configure GPIO pin : PC0 */
+	GPIO_InitStruct.Pin = GPIO_PIN_0;
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 	/*Configure GPIO pin : LD2_Pin */
 	GPIO_InitStruct.Pin = LD2_Pin;
@@ -281,10 +545,11 @@ static void MX_GPIO_Init(void) {
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
-	/*Configure GPIO pin : PB1 */
-	GPIO_InitStruct.Pin = GPIO_PIN_1;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	/*Configure GPIO pins : PB1 PB2 PB3 PB4 */
+	GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
