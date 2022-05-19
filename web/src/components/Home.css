@@ -1,0 +1,73 @@
+.rainbow-letters {
+	font-size: 40px;
+	font-family: sans-serif;
+	font-weight: lighter;
+	text-transform: uppercase;
+}
+
+.rainbow-letters span:nth-child(1) {
+	color: #8c52ff;
+}
+
+.rainbow-letters span:nth-child(2) {
+	color: #5d18eb;
+}
+
+.rainbow-letters span:nth-child(3) {
+	color: #00989d;
+}
+
+.rainbow-letters span:nth-child(4) {
+	color: #00c2cb;
+}
+
+.rainbow-letters span:nth-child(5) {
+	color: #37b5ff;
+}
+
+.rainbow-letters span:nth-child(6) {
+	color: rgb(25, 24, 24);
+}
+
+.rainbow-letters span:nth-child(7) {
+	color: #008036;
+}
+
+.rainbow-letters span:nth-child(8) {
+	color: #7ed957;
+}
+
+.rainbow-letters span:nth-child(9) {
+	color: #c9e265;
+}
+.rainbow-letters span:nth-child(10) {
+	color: #bba242;
+}
+.rainbow-letters span:nth-child(11) {
+	color: #ffbd58;
+}
+.rainbow-letters span:nth-child(12) {
+	color: #ff904d;
+}
+.rainbow-letters span:nth-child(13) {
+	color: #ff1616;
+}
+.rainbow-letters span:nth-child(14) {
+	color: #ff5757;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.main {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
