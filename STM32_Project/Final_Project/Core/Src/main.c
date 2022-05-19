@@ -282,12 +282,13 @@ int main(void) {
 
 	Set_Scaling(Scl20);
 
-//	int undetected_time = 0;
-//	const int detected_delay = 20;
-//	int is_detected = 0;
-//	uint32_t lastClap = HAL_GetTick();
-//	int clapCount = 0;
-//	const int timeBetweenClap = 1000;
+	int undetected_time = 0;
+	const int detected_delay = 20;
+	int is_detected = 0;
+	uint32_t lastClap = HAL_GetTick();
+	int clapCount = 0;
+	const int timeBetweenClap = 1000;
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -296,28 +297,30 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-//		if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1) == HAL_OK) { //detected Sound
-//			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
-//				if (HAL_GetTick() <= lastClap + timeBetweenClap)
-//					clapCount += 1;
-//				else
-//					clapCount = 1;
-//				if (clapCount >= 3) {
-//					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //turn LED on
-//					clapCount = 0;
-//				}
-//				lastClap = HAL_GetTick();
-//			}
-//			is_detected = 1;
-//			undetected_time = 0;
-//		} else { // undetected sound
-//			undetected_time++;
-//			is_detected = 0;
-//		}
-//		HAL_Delay(1);
-		ReadColor(10);
-		Print_Output();
-		HAL_Delay(750);
+
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected Sound
+
+			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
+				if (HAL_GetTick() <= lastClap + timeBetweenClap)
+					clapCount += 1;
+				else
+					clapCount = 1;
+				if (clapCount >= 3) {
+					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //toggle LED
+					ReadColor(10); //read color
+					Print_Output(); //send color's value
+
+					clapCount = 0;
+				}
+				lastClap = HAL_GetTick();
+			}
+			is_detected = 1;
+			undetected_time = 0;
+		} else { // undetected sound
+			undetected_time++;
+			is_detected = 0;
+		}
+		HAL_Delay(1);
 	}
 	/* USER CODE END 3 */
 }
@@ -467,14 +470,20 @@ static void MX_GPIO_Init(void) {
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
 	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOB,
-	GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4,
+			GPIO_PIN_RESET);
 
 	/*Configure GPIO pin : B1_Pin */
 	GPIO_InitStruct.Pin = B1_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+
+	/*Configure GPIO pin : PC0 */
+	GPIO_InitStruct.Pin = GPIO_PIN_0;
+	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 	/*Configure GPIO pin : LD2_Pin */
 	GPIO_InitStruct.Pin = LD2_Pin;
