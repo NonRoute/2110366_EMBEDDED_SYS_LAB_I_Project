@@ -82,11 +82,10 @@ enum Filter { //filter of color sensor
 
 uint8_t set_color; //Red, BLue, Green
 int wait_for_callback = 0; //0 when receive callback, 1 when waiting for callback
-float frequency = 0; //update when interrupt
-float Output_Color = 0; //update when interrupt
+float frequency = 0; //update when get interrupt callback
+float Output_Color = 0; //update when get interrupt callback
 
 float RGB[3]; //Array [Red, Green, Blue]
-float sum_frequency = 0; //for calculate average frequency (only used for sensor calibration)
 
 /* Measure Frequency */
 uint32_t IC_Val1 = 0;
@@ -176,31 +175,31 @@ void Set_Filter(uint8_t mode) //Mode is type enum Filter
 	set_color = mode;
 	switch (mode) {
 	case (Red):
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S4 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S2 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S3 L
 		break;
 	case (Blue):
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S3 L
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0); //S2 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S3 H
 		break;
 	case (Clear):
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S3 H
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S4 L
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S2 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 0); //S3 L
 		break;
 	case (Green):
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S3 H
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S4 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 1); //S2 H
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, 1); //S3 H
 		break;
 	}
 }
 
-void Print_Output() { //send RGB value by UART1 to NODE MCU
+void Print_Output() { //send RGB value by UART1 to NodeMCU
 	char buffer[100];
 	sprintf(buffer, "%d %d %d\r\n", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
 	HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
-void Print_Frequency(uint8_t set_color) { //send RGB and frequency by UART (used for sensor calibration)
+void Print_Frequency(uint8_t set_color, float sum_frequency) { //send RGB and frequency by UART (used for sensor calibration)
 	char buffer[100];
 	switch (set_color) {
 	case Red:
@@ -241,7 +240,6 @@ void ReadColor(int read_times) { //read color value for 'read_times' times and c
 	RGB[1] /= read_times;
 
 	RGB[2] = 0;
-	sum_frequency = 0;
 	for (int i = 0; i < read_times; i++) {
 		RGB[2] += GetColor(Blue);
 	}
@@ -249,6 +247,7 @@ void ReadColor(int read_times) { //read color value for 'read_times' times and c
 }
 
 void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibration
+	float sum_frequency; //for calculate average frequency (only used for sensor calibration)
 	while (1) {
 		RGB[0] = 0;
 		sum_frequency = 0;
@@ -258,7 +257,7 @@ void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibratio
 		}
 		RGB[0] /= read_times;
 		sum_frequency /= read_times;
-		Print_Frequency(Red);
+		Print_Frequency(Red, sum_frequency);
 
 		RGB[1] = 0;
 		sum_frequency = 0;
@@ -268,7 +267,7 @@ void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibratio
 		}
 		RGB[1] /= read_times;
 		sum_frequency /= read_times;
-		Print_Frequency(Green);
+		Print_Frequency(Green, sum_frequency);
 
 		RGB[2] = 0;
 		sum_frequency = 0;
@@ -278,7 +277,7 @@ void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibratio
 		}
 		RGB[2] /= read_times;
 		sum_frequency /= read_times;
-		Print_Frequency(Blue);
+		Print_Frequency(Blue, sum_frequency);
 		char buffer[100];
 		sprintf(buffer,
 				"-------------------Sensor Calibration-----------------\r\n");

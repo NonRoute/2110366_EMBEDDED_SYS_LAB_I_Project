@@ -166,3 +166,15 @@ STM32_Project/.metadata/.plugins/org.eclipse.cdt.core/Final_Project.165096658281
 *.xmi
 *.ini
 *.list
+*.pdom
+STM32_Project/.metadata/.plugins/org.eclipse.cdt.core/Final_Project.1650966582814.pdom
+*.log
+STM32_Project/.metadata/.plugins/org.eclipse.cdt.ui/Final_Project.build.log
+STM32_Project/.metadata/.plugins/org.eclipse.cdt.ui/global-build.log
+*.log
+*.resources
+STM32_Project/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+STM32_Project/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+*.xmi
+STM32_Project/Final_Project/Debug/Final_Project.list
+*.list
