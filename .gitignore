@@ -154,3 +154,15 @@ STM32_Project/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.
 STM32_Project/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.workbench.prefs
 STM32_Project/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 STM32_Project/.metadata/version.ini
+*.log
+STM32_Project/.metadata/.log
+STM32_Project/.metadata/.plugins/org.eclipse.cdt.core/.log
+STM32_Project/.metadata/.plugins/org.eclipse.cdt.core/Final_Project.1650966582814.pdom
+*.log
+*.log
+*.resources
+*.prefs
+*.prefs
+*.xmi
+*.ini
+*.list

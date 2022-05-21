@@ -41,6 +41,7 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim3;
 
+UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -52,6 +53,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -62,35 +64,35 @@ static void MX_TIM3_Init(void);
 #define TIMCLOCK 84000000
 #define PRESCALAR 84
 
-//value for color calibration
-#define MIN_RED 4000.0 //5000.0 //frequency when R = 0
-#define MAX_RED 27000.0 //16400.0 //frequency when R = 255
-#define MIN_GREEN 3100 //7000.0
-#define MAX_GREEN 16000.0 //11000.0
-#define MIN_BLUE 3800.0 //6000.0
-#define MAX_BLUE 20000.0 //10000.0
+//value for sensor calibration
+#define MIN_RED 2100.0 //5000.0 //frequency when R = 0
+#define MAX_RED 25000.0 //16400.0 //frequency when R = 255
+#define MIN_GREEN 1500 //7000.0
+#define MAX_GREEN 20000.0 //11000.0
+#define MIN_BLUE 1800.0 //6000.0
+#define MAX_BLUE 24000.0 //10000.0
 
-enum Scaling {
+enum Scaling { //output frequency scaling of color sensor
 	Scl0, Scl2, Scl20, Scl100
 };
 
-enum Filter {
+enum Filter { //filter of color sensor
 	Red, Blue, Clear, Green
 };
+
+uint8_t set_color; //Red, BLue, Green
+int wait_for_callback = 0; //0 when receive callback, 1 when waiting for callback
+float frequency = 0; //update when interrupt
+float Output_Color = 0; //update when interrupt
+
+float RGB[3]; //Array [Red, Green, Blue]
+float sum_frequency = 0; //for calculate average frequency (only used for sensor calibration)
 
 /* Measure Frequency */
 uint32_t IC_Val1 = 0;
 uint32_t IC_Val2 = 0;
 uint32_t Difference = 0;
 int Is_First_Captured = 0;
-
-uint8_t set_color;
-int wait_for_callback = 0; //0 when receive callback, 1 when waiting for callback
-float frequency = 0; //update when interrupt
-float Output_Color = 0; //update when interrupt
-
-float RGB[3]; //Array [Red, Green, Blue]
-float sum_frequency = 0; //for calculate average frequency
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3) {
@@ -119,7 +121,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
 			Is_First_Captured = 0; // set it back to false
 
-			//Freq to Color -> Depending of the filter
+			//Frequency to Color -> Depending of the filter
 			switch (set_color) {
 			case Red:
 				Output_Color = (255.0 / (MAX_RED - MIN_RED))
@@ -192,14 +194,10 @@ void Set_Filter(uint8_t mode) //Mode is type enum Filter
 	}
 }
 
-void Print_Output() { //send RGB value by UART to NODE MCU
+void Print_Output() { //send RGB value by UART1 to NODE MCU
 	char buffer[100];
-	sprintf(buffer, "Red = %d \r\n", (int) RGB[0]);
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-	sprintf(buffer, "Green = %d \r\n", (int) RGB[1]);
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
-	sprintf(buffer, "Blue = %d \r\n", (int) RGB[2]);
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	sprintf(buffer, "%d %d %d\r\n", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
+	HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
 void Print_Frequency(uint8_t set_color) { //send RGB and frequency by UART (used for sensor calibration)
@@ -209,7 +207,8 @@ void Print_Frequency(uint8_t set_color) { //send RGB and frequency by UART (used
 		sprintf(buffer, "Red = %f frequency = %f \r\n", RGB[0], sum_frequency);
 		break;
 	case Green:
-		sprintf(buffer, "Green = %f frequency = %f \r\n", RGB[1], sum_frequency);
+		sprintf(buffer, "Green = %f frequency = %f \r\n", RGB[1],
+				sum_frequency);
 		break;
 	case Blue:
 		sprintf(buffer, "Blue = %f frequency = %f \r\n", RGB[2], sum_frequency);
@@ -218,7 +217,7 @@ void Print_Frequency(uint8_t set_color) { //send RGB and frequency by UART (used
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
-float GetColor(uint8_t set_color) { //set filter and return color value from interrupt
+float GetColor(uint8_t set_color) { //set filter and return color value get from interrupt callback function
 	Set_Filter(set_color);
 	wait_for_callback = 1;
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3); //start interrupt
@@ -281,7 +280,8 @@ void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibratio
 		sum_frequency /= read_times;
 		Print_Frequency(Blue);
 		char buffer[100];
-		sprintf(buffer, "-------------------Sensor Calibration-----------------\r\n");
+		sprintf(buffer,
+				"-------------------Sensor Calibration-----------------\r\n");
 		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 		HAL_Delay(delay);
 	}
@@ -318,11 +318,12 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_TIM3_Init();
+	MX_USART1_UART_Init();
 	/* USER CODE BEGIN 2 */
 
 	HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_3);
 
-	Set_Scaling(Scl20);
+	Set_Scaling(Scl20); //set color sensor's output frequency scaling to 20%
 
 	int undetected_time = 0;
 	const int detected_delay = 20;
@@ -331,7 +332,7 @@ int main(void) {
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
 
-	// ReadColorWithFrequency(100,1000); //for sensor calibration
+	//ReadColorWithFrequency(100,1000); //uncomment for sensor calibration
 
 	/* USER CODE END 2 */
 
@@ -342,18 +343,17 @@ int main(void) {
 
 		/* USER CODE BEGIN 3 */
 
-		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected Sound
-
-			if (!is_detected && undetected_time > detected_delay) { //before is undetected and undetected more than detected_delay
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected sound
+			if (!is_detected && undetected_time > detected_delay) { //undetected sound before and undetected more than detected_delay
 				if (HAL_GetTick() <= lastClap + timeBetweenClap)
 					clapCount += 1;
 				else
-					clapCount = 1; //time between claps too long
+					clapCount = 1; //time between claps too long, reset clapCount to 1
 				if (clapCount >= 3) {
 
 					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //toggle LED
-					ReadColor(10); //read color
-					Print_Output(); //send color's value
+					ReadColor(30); //read color
+					Print_Output(); //send color's value through UART1 to NodeMCU
 
 					clapCount = 0; //reset clapCount
 				}
@@ -463,6 +463,37 @@ static void MX_TIM3_Init(void) {
 	/* USER CODE BEGIN TIM3_Init 2 */
 
 	/* USER CODE END TIM3_Init 2 */
+
+}
+
+/**
+ * @brief USART1 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_USART1_UART_Init(void) {
+
+	/* USER CODE BEGIN USART1_Init 0 */
+
+	/* USER CODE END USART1_Init 0 */
+
+	/* USER CODE BEGIN USART1_Init 1 */
+
+	/* USER CODE END USART1_Init 1 */
+	huart1.Instance = USART1;
+	huart1.Init.BaudRate = 9600;
+	huart1.Init.WordLength = UART_WORDLENGTH_8B;
+	huart1.Init.StopBits = UART_STOPBITS_1;
+	huart1.Init.Parity = UART_PARITY_NONE;
+	huart1.Init.Mode = UART_MODE_TX_RX;
+	huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+	if (HAL_UART_Init(&huart1) != HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN USART1_Init 2 */
+
+	/* USER CODE END USART1_Init 2 */
 
 }
 
