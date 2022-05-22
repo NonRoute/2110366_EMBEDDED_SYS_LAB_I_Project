@@ -16,6 +16,7 @@ export default function CountdownTimer() {
 				onUpdate={(remainingTime) => {
 					console.log(remainingTime);
 				}}
+				size={130}
 				isPlaying
 				duration={60}
 				colors="#C18FEE"
@@ -26,9 +27,9 @@ export default function CountdownTimer() {
 					</Typography>
 				)}
 			</CountdownCircleTimer>
-			<button onClick={() => setKey((prevKey) => prevKey + 1)}>
+			{/* <button onClick={() => setKey((prevKey) => prevKey + 1)}>
 				Restart Timer
-			</button>
+			</button> */}
 		</div>
 	);
 }
