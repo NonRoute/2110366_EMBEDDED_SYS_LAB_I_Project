@@ -71,3 +71,13 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.current-color {
+	display: flex;
+	padding-left: 13.5rem;
+	margin: 3rem;
+}
+
+.timer {
+	margin-top: 5rem;
+}
