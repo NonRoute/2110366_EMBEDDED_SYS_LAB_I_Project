@@ -66,12 +66,18 @@ static void MX_USART1_UART_Init(void);
 #define PRESCALAR 84
 
 //value for sensor calibration
-#define MIN_RED 2100.0 //5000.0 //frequency when R = 0
-#define MAX_RED 25000.0 //16400.0 //frequency when R = 255
-#define MIN_GREEN 1500 //7000.0
-#define MAX_GREEN 20000.0 //11000.0
-#define MIN_BLUE 1800.0 //6000.0
-#define MAX_BLUE 24000.0 //10000.0
+#define RED_D2 -0.000000315
+#define RED_D1 0.019
+#define RED_D0 -27.626
+#define RED_TH 30158
+#define GREEN_D2 -0.000000506
+#define GREEN_D1 0.0226
+#define GREEN_D0 3.2663
+#define GREEN_TH 22600
+#define BLUE_D2 -0.00000028
+#define BLUE_D1 0.0179
+#define BLUE_D0 -26.676
+#define BLUE_TH 22332
 
 enum Scaling { //output frequency scaling of color sensor
 	Scl0, Scl2, Scl20, Scl100
@@ -83,10 +89,10 @@ enum Filter { //filter of color sensor
 
 uint8_t set_color; //Red, BLue, Green
 int wait_for_callback = 0; //0 when receive callback, 1 when waiting for callback
-float frequency = 0; //update when get interrupt callback
-float Output_Color = 0; //update when get interrupt callback
+double frequency = 0; //update when get interrupt callback
+double Output_Color = 0; //update when get interrupt callback
 
-float RGB[3]; //Array [Red, Green, Blue]
+double RGB[3]; //Array [Red, Green, Blue]
 
 /* Measure Frequency */
 uint32_t IC_Val1 = 0;
@@ -124,18 +130,30 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 			//Frequency to Color -> Depending of the filter
 			switch (set_color) {
 			case Red:
-				Output_Color = (255.0 / (MAX_RED - MIN_RED))
-						* (frequency - MIN_RED);
+				if (frequency > RED_TH) {
+					Output_Color = 255;
+				} else {
+					Output_Color = RED_D2 * frequency
+							* frequency+ RED_D1*frequency + RED_D0;
+				}
 				break;
 
 			case Green:
-				Output_Color = (255.0 / (MAX_GREEN - MIN_GREEN))
-						* (frequency - MIN_GREEN);
+				if (frequency > GREEN_TH) {
+					Output_Color = 255;
+				} else {
+					Output_Color = GREEN_D2 * frequency
+							* frequency+ GREEN_D1*frequency + GREEN_D0;
+				}
 				break;
 
 			case Blue:
-				Output_Color = (255.0 / (MAX_BLUE - MIN_BLUE))
-						* (frequency - MIN_BLUE);
+				if (frequency > BLUE_TH) {
+					Output_Color = 255;
+				} else {
+					Output_Color = BLUE_D2 * frequency
+							* frequency+ BLUE_D1*frequency + BLUE_D0;
+				}
 				break;
 			}
 
@@ -196,7 +214,8 @@ void Set_Filter(uint8_t mode) //Mode is type enum Filter
 
 void Print_Output() { //send RGB value by UART1 to NodeMCU
 	char buffer[100];
-	sprintf(buffer, "%d %d %d\r\n", (int)roundf(RGB[0]), (int)roundf(RGB[1]), (int)roundf(RGB[2]));
+	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]),
+			(int) round(RGB[2]));
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
@@ -204,14 +223,16 @@ void Print_Frequency(uint8_t set_color, float sum_frequency) { //send RGB and fr
 	char buffer[100];
 	switch (set_color) {
 	case Red:
-		sprintf(buffer, "Red = %d frequency = %d \r\n", (int)roundf(RGB[0]), (int)roundf(sum_frequency));
+		sprintf(buffer, "Red = %d frequency = %d \r\n", (int) round(RGB[0]),
+				(int) round(sum_frequency));
 		break;
 	case Green:
-		sprintf(buffer, "Green = %d frequency = %d \r\n", (int)roundf(RGB[1]),
-				(int)roundf(sum_frequency));
+		sprintf(buffer, "Green = %d frequency = %d \r\n", (int) round(RGB[1]),
+				(int) round(sum_frequency));
 		break;
 	case Blue:
-		sprintf(buffer, "Blue = %d frequency = %d \r\n", (int)roundf(RGB[2]), (int)roundf(sum_frequency));
+		sprintf(buffer, "Blue = %d frequency = %d \r\n", (int) round(RGB[2]),
+				(int) round(sum_frequency));
 		break;
 	}
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
@@ -334,7 +355,7 @@ int main(void) {
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
 
-	ReadColorWithFrequency(1000,5000); //uncomment for sensor calibration
+//	ReadColorWithFrequency(1000, 2000); //uncomment for sensor calibration
 
 	/* USER CODE END 2 */
 

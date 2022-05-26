@@ -1,25 +1,25 @@
-17:07:53 **** Incremental Build of configuration Debug for project Final_Project ****
+01:51:33 **** Incremental Build of configuration Debug for project Final_Project ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'Print_Output':
-../Core/Src/main.c:199:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
-  199 |  sprintf(buffer, "%d %d %d\r\n", (int)roundf(RGB[0]), (int)roundf(RGB[1]), (int)roundf(RGB[2]));
+../Core/Src/main.c:217:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  217 |  sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]),
       |  ^~~~~~~
-../Core/Src/main.c:199:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:217:2: warning: incompatible implicit declaration of built-in function 'sprintf'
 ../Core/Src/main.c:22:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
    21 | #include <math.h>
   +++ |+#include <stdio.h>
    22 | 
-../Core/Src/main.c:200:38: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
-  200 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+../Core/Src/main.c:219:38: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  219 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                                      ^~~~~~
-../Core/Src/main.c:200:38: warning: incompatible implicit declaration of built-in function 'strlen'
+../Core/Src/main.c:219:38: warning: incompatible implicit declaration of built-in function 'strlen'
 ../Core/Src/main.c:22:1: note: include '<string.h>' or provide a declaration of 'strlen'
    21 | #include <math.h>
   +++ |+#include <string.h>
    22 | 
-../Core/Src/main.c:200:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
-  200 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+../Core/Src/main.c:219:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  219 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                             ^~~~~~~
       |                             |
       |                             char (*)[100]
@@ -31,16 +31,16 @@ In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
   722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
 ../Core/Src/main.c: In function 'Print_Frequency':
-../Core/Src/main.c:207:3: warning: incompatible implicit declaration of built-in function 'sprintf'
-  207 |   sprintf(buffer, "Red = %d frequency = %d \r\n", (int)roundf(RGB[0]), (int)roundf(sum_frequency));
+../Core/Src/main.c:226:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+  226 |   sprintf(buffer, "Red = %d frequency = %d \r\n", (int) round(RGB[0]),
       |   ^~~~~~~
-../Core/Src/main.c:207:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
-../Core/Src/main.c:217:38: warning: incompatible implicit declaration of built-in function 'strlen'
-  217 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+../Core/Src/main.c:226:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:238:38: warning: incompatible implicit declaration of built-in function 'strlen'
+  238 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                                      ^~~~~~
-../Core/Src/main.c:217:38: note: include '<string.h>' or provide a declaration of 'strlen'
-../Core/Src/main.c:217:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
-  217 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+../Core/Src/main.c:238:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:238:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  238 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                             ^~~~~~~
       |                             |
       |                             char (*)[100]
@@ -52,16 +52,16 @@ In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
   722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
 ../Core/Src/main.c: In function 'ReadColorWithFrequency':
-../Core/Src/main.c:254:3: warning: incompatible implicit declaration of built-in function 'sprintf'
-  254 |   sprintf(buffer,
+../Core/Src/main.c:275:3: warning: incompatible implicit declaration of built-in function 'sprintf'
+  275 |   sprintf(buffer,
       |   ^~~~~~~
-../Core/Src/main.c:254:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
-../Core/Src/main.c:256:39: warning: incompatible implicit declaration of built-in function 'strlen'
-  256 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+../Core/Src/main.c:275:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:277:39: warning: incompatible implicit declaration of built-in function 'strlen'
+  277 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                                       ^~~~~~
-../Core/Src/main.c:256:39: note: include '<string.h>' or provide a declaration of 'strlen'
-../Core/Src/main.c:256:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
-  256 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+../Core/Src/main.c:277:39: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c:277:30: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  277 |   HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                              ^~~~~~~
       |                              |
       |                              char (*)[100]
@@ -73,8 +73,8 @@ In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
   722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:348:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
-  348 |   if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected sound
+../Core/Src/main.c:369:43: warning: comparison between 'GPIO_PinState' and 'enum <anonymous>' [-Wenum-compare]
+  369 |   if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected sound
       |                                           ^~
 arm-none-eabi-gcc -o "Final_Project.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\OneDrive\University\year_2\semester_2\2110366_EMBEDDED_SYS_LAB_I\Project\Repository\2110366_EMBEDDED_SYS_LAB_I_Project\STM32_Project\Final_Project\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Final_Project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Final_Project.elf
@@ -82,11 +82,11 @@ Finished building target: Final_Project.elf
 arm-none-eabi-size   Final_Project.elf 
 arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
    text	   data	    bss	    dec	    hex	filename
-  31508	    484	   1844	  33836	   842c	Final_Project.elf
+  31288	    484	   1864	  33636	   8364	Final_Project.elf
 Finished building: default.size.stdout
  
 Finished building: Final_Project.list
  
 
-17:07:54 Build Finished. 0 errors, 12 warnings. (took 807ms)
+01:51:34 Build Finished. 0 errors, 12 warnings. (took 799ms)
 
