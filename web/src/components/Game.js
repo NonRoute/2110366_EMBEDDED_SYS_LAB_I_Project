@@ -33,17 +33,18 @@ export default function Game() {
 	const [gameColor, setGameColor] = useState({ r: 255, g: 255, b: 255 });
 	const [timestamp, setTimestamp] = useState(0);
 	const [isOver, setIsOver] = useState(false);
-	const [score, setScore] = useState(0);
+	const [score, setScore] = useState(-1);
 	const [showSensor, setShowSensor] = useState(false);
 
 	function handleCorrectAnswer() {
 		setIsCorrect(false);
+		setShowSensor(false);
 		console.log('correct');
+		setScore((prevScore) => prevScore + 1);
 		const newColor = genColor();
 		setGameColor((prevState) => {
 			return { ...prevState, ...newColor };
 		});
-		setShowSensor(false);
 	}
 
 	function update() {
@@ -74,7 +75,7 @@ export default function Game() {
 	useEffect(() => {
 		if (checkColor(colorFromUser, gameColor)) {
 			setIsCorrect(true);
-		} else {
+		} else if (score > 0) {
 			setShowSensor(true);
 		}
 		update();
@@ -105,6 +106,15 @@ export default function Game() {
 				>
 					FIND AN ITEM THAT IS THE SAME COLOR AS THE COLOR IN THE BOX.
 				</Typography>
+				<Typography
+					sx={{
+						color: 'white',
+						fontSize: '17px',
+						fontStyle: 'italic',
+					}}
+				>
+					Score : {score}
+				</Typography>
 				<div className="current-color">
 					<div className="wrongans">
 						<Typography
@@ -133,6 +143,7 @@ export default function Game() {
 							}}
 						></Container>
 					</div>
+
 					<ColorBox
 						color={`rgb(${gameColor.r}, ${gameColor.g}, ${gameColor.b})`}
 					/>
@@ -165,6 +176,7 @@ export default function Game() {
 													...newColor,
 												};
 											});
+											setScore(0);
 										}}
 									>
 										Restart
