@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <math.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -195,7 +196,7 @@ void Set_Filter(uint8_t mode) //Mode is type enum Filter
 
 void Print_Output() { //send RGB value by UART1 to NodeMCU
 	char buffer[100];
-	sprintf(buffer, "%d %d %d\0", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
+	sprintf(buffer, "%d %d %d\r\n", (int)roundf(RGB[0]), (int)roundf(RGB[1]), (int)roundf(RGB[2]));
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
@@ -203,14 +204,14 @@ void Print_Frequency(uint8_t set_color, float sum_frequency) { //send RGB and fr
 	char buffer[100];
 	switch (set_color) {
 	case Red:
-		sprintf(buffer, "Red = %f frequency = %f \r\n", RGB[0], sum_frequency);
+		sprintf(buffer, "Red = %d frequency = %d \r\n", (int)roundf(RGB[0]), (int)roundf(sum_frequency));
 		break;
 	case Green:
-		sprintf(buffer, "Green = %f frequency = %f \r\n", RGB[1],
-				sum_frequency);
+		sprintf(buffer, "Green = %d frequency = %d \r\n", (int)roundf(RGB[1]),
+				(int)roundf(sum_frequency));
 		break;
 	case Blue:
-		sprintf(buffer, "Blue = %f frequency = %f \r\n", RGB[2], sum_frequency);
+		sprintf(buffer, "Blue = %d frequency = %d \r\n", (int)roundf(RGB[2]), (int)roundf(sum_frequency));
 		break;
 	}
 	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
@@ -249,6 +250,11 @@ void ReadColor(int read_times) { //read color value for 'read_times' times and c
 void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibration
 	float sum_frequency; //for calculate average frequency (only used for sensor calibration)
 	while (1) {
+		char buffer[100];
+		sprintf(buffer,
+				"-------------------Sensor Calibration-----------------\r\n");
+		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+
 		RGB[0] = 0;
 		sum_frequency = 0;
 		for (int i = 0; i < read_times; i++) {
@@ -278,10 +284,7 @@ void ReadColorWithFrequency(int read_times, int delay) { //for sensor calibratio
 		RGB[2] /= read_times;
 		sum_frequency /= read_times;
 		Print_Frequency(Blue, sum_frequency);
-		char buffer[100];
-		sprintf(buffer,
-				"-------------------Sensor Calibration-----------------\r\n");
-		HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+
 		HAL_Delay(delay);
 	}
 }
@@ -331,7 +334,7 @@ int main(void) {
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
 
-	//ReadColorWithFrequency(100,1000); //uncomment for sensor calibration
+	ReadColorWithFrequency(1000,5000); //uncomment for sensor calibration
 
 	/* USER CODE END 2 */
 
