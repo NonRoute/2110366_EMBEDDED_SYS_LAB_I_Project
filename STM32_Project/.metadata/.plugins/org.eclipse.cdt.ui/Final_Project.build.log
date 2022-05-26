@@ -1,17 +1,20 @@
-18:01:59 **** Incremental Build of configuration Debug for project Final_Project ****
+16:30:00 **** Incremental Build of configuration Debug for project Final_Project ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'Print_Output':
 ../Core/Src/main.c:198:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
-  198 |  sprintf(buffer, "%d %d %d\r\n", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
+  198 |  sprintf(buffer, "%d %d %d\0", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
       |  ^~~~~~~
 ../Core/Src/main.c:198:2: warning: incompatible implicit declaration of built-in function 'sprintf'
 ../Core/Src/main.c:21:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
    20 | #include "main.h"
   +++ |+#include <stdio.h>
    21 | 
+../Core/Src/main.c:198:27: warning: embedded '\0' in format [-Wformat-contains-nul]
+  198 |  sprintf(buffer, "%d %d %d\0", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
+      |                           ^~
 ../Core/Src/main.c:199:38: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
-  199 |  HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
+  199 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                                      ^~~~~~
 ../Core/Src/main.c:199:38: warning: incompatible implicit declaration of built-in function 'strlen'
 ../Core/Src/main.c:21:1: note: include '<string.h>' or provide a declaration of 'strlen'
@@ -19,7 +22,7 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -D
   +++ |+#include <string.h>
    21 | 
 ../Core/Src/main.c:199:29: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
-  199 |  HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
+  199 |  HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
       |                             ^~~~~~~
       |                             |
       |                             char (*)[100]
@@ -82,11 +85,11 @@ Finished building target: Final_Project.elf
 arm-none-eabi-size   Final_Project.elf 
 arm-none-eabi-objdump -h -S  Final_Project.elf  > "Final_Project.list"
    text	   data	    bss	    dec	    hex	filename
-  31340	    484	   1844	  33668	   8384	Final_Project.elf
+  30620	    484	   1844	  32948	   80b4	Final_Project.elf
 Finished building: default.size.stdout
  
 Finished building: Final_Project.list
  
 
-18:02:00 Build Finished. 0 errors, 12 warnings. (took 807ms)
+16:30:01 Build Finished. 0 errors, 13 warnings. (took 809ms)
 

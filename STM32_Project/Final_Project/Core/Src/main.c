@@ -195,8 +195,8 @@ void Set_Filter(uint8_t mode) //Mode is type enum Filter
 
 void Print_Output() { //send RGB value by UART1 to NodeMCU
 	char buffer[100];
-	sprintf(buffer, "%d %d %d\r\n", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
-	HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	sprintf(buffer, "%d %d %d\0", (int) RGB[0], (int) RGB[1], (int) RGB[2]);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
 void Print_Frequency(uint8_t set_color, float sum_frequency) { //send RGB and frequency by UART (used for sensor calibration)
@@ -351,7 +351,7 @@ int main(void) {
 				if (clapCount >= 3) {
 
 					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //toggle LED
-					ReadColor(30); //read color
+					ReadColor(100); //read color
 					Print_Output(); //send color's value through UART1 to NodeMCU
 
 					clapCount = 0; //reset clapCount
