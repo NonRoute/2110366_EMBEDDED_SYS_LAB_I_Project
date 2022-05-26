@@ -32,9 +32,9 @@ export default function CountdownTimer(props) {
 					</Typography>
 				)}
 			</CountdownCircleTimer>
-			<button onClick={() => props.setIsCorrect(true)}>
+			{/* <button onClick={() => props.setIsCorrect(true)}>
 				Restart Timer
-			</button>
+			</button> */}
 		</div>
 	);
 }

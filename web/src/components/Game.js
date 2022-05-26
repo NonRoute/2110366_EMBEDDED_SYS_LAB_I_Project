@@ -87,19 +87,12 @@ export default function Game() {
 		setKey((prevKey) => prevKey + 1);
 
 		update();
-		// handleCorrectAnswer();
 		console.log('---------------');
 		console.log('gamecolor : ', gameColor);
 		console.log('color from user: ', colorFromUser);
 		console.log(timestamp);
 		console.log('---------------');
 	}, [timestamp]);
-
-	// useEffect(() => {
-	// 	console.log(gameColor);
-	// 	console.log(colorFromUser);
-	// 	console.log(timestamp);
-	// }, [timestamp]);
 
 	return (
 		<div className="main-container">
