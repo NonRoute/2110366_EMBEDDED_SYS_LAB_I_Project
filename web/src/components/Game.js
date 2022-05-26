@@ -112,38 +112,40 @@ export default function Game() {
 							setIsOver={setIsOver}
 						/>
 					) : (
-						<div className="gameover">
-							<Typography
-								className="gameovertext"
-								sx={{ fontSize: '22px' }}
-							>
-								Game Over
-							</Typography>
-							<div className="button-end">
-								<Button
-									variant="outlined"
-									sx={{ mt: 2, mr: 1 }}
-									onClick={() => {
-										setIsOver(false);
-										const newColor = genColor();
-										setGameColor((prevState) => {
-											return {
-												...prevState,
-												...newColor,
-											};
-										});
-									}}
+						<div className="timer">
+							<div className="gameover">
+								<Typography
+									className="gameovertext"
+									sx={{ fontSize: '22px' }}
 								>
-									Restart
-								</Button>
-								<Button
-									component={Link}
-									to="/"
-									variant="outlined"
-									sx={{ mt: 2 }}
-								>
-									Main Menu
-								</Button>
+									Game Over
+								</Typography>
+								<div className="button-end">
+									<Button
+										variant="outlined"
+										sx={{ mt: 2, mr: 1 }}
+										onClick={() => {
+											setIsOver(false);
+											const newColor = genColor();
+											setGameColor((prevState) => {
+												return {
+													...prevState,
+													...newColor,
+												};
+											});
+										}}
+									>
+										Restart
+									</Button>
+									<Button
+										component={Link}
+										to="/"
+										variant="outlined"
+										sx={{ mt: 2 }}
+									>
+										Main Menu
+									</Button>
+								</div>
 							</div>
 						</div>
 					)}

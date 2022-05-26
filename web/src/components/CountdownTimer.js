@@ -11,7 +11,7 @@ export default function CountdownTimer(props) {
 				onComplete={() => {
 					console.log('gameover');
 					props.setIsOver(true);
-					return { shouldRepeat: true, delay: 2 };
+					// return { shouldRepeat: true, delay: 2 };
 				}}
 				onUpdate={(remainingTime) => {
 					if (props.isCorrect) {
