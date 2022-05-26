@@ -35,6 +35,7 @@ export default function Game() {
 	const [isOver, setIsOver] = useState(false);
 	const [score, setScore] = useState(-1);
 	const [showSensor, setShowSensor] = useState(false);
+	const [key, setKey] = useState(0);
 
 	function handleCorrectAnswer() {
 		setIsCorrect(false);
@@ -77,7 +78,14 @@ export default function Game() {
 			setIsCorrect(true);
 		} else if (score > 0) {
 			setShowSensor(true);
+		} else if (key > 1 && score === 0) {
+			setShowSensor(true);
 		}
+		if (isOver) {
+			setShowSensor(false);
+		}
+		setKey((prevKey) => prevKey + 1);
+
 		update();
 		// handleCorrectAnswer();
 		console.log('---------------');
@@ -130,6 +138,19 @@ export default function Game() {
 						>
 							Wrong Answer!
 						</Typography>
+						<Typography
+							color={'white'}
+							sx={{
+								fontSize: '15px',
+								textAlign: 'center',
+								marginBottom: '1rem',
+								visibility: `${
+									!showSensor ? 'hidden' : 'visible'
+								}`,
+							}}
+						>
+							This is your color
+						</Typography>
 
 						<Container
 							sx={{
@@ -177,6 +198,8 @@ export default function Game() {
 												};
 											});
 											setScore(0);
+											setShowSensor(false);
+											setKey(2);
 										}}
 									>
 										Restart
