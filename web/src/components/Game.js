@@ -33,17 +33,19 @@ export default function Game() {
 	const [gameColor, setGameColor] = useState({ r: 255, g: 255, b: 255 });
 	const [timestamp, setTimestamp] = useState(0);
 	const [isOver, setIsOver] = useState(false);
-	const [score, setScore] = useState(0);
+	const [score, setScore] = useState(-1);
 	const [showSensor, setShowSensor] = useState(false);
+	const [key, setKey] = useState(0);
 
 	function handleCorrectAnswer() {
 		setIsCorrect(false);
+		setShowSensor(false);
 		console.log('correct');
+		setScore((prevScore) => prevScore + 1);
 		const newColor = genColor();
 		setGameColor((prevState) => {
 			return { ...prevState, ...newColor };
 		});
-		setShowSensor(false);
 	}
 
 	function update() {
@@ -74,23 +76,23 @@ export default function Game() {
 	useEffect(() => {
 		if (checkColor(colorFromUser, gameColor)) {
 			setIsCorrect(true);
-		} else {
+		} else if (score > 0) {
+			setShowSensor(true);
+		} else if (key > 1 && score === 0) {
 			setShowSensor(true);
 		}
+		if (isOver) {
+			setShowSensor(false);
+		}
+		setKey((prevKey) => prevKey + 1);
+
 		update();
-		// handleCorrectAnswer();
 		console.log('---------------');
 		console.log('gamecolor : ', gameColor);
 		console.log('color from user: ', colorFromUser);
 		console.log(timestamp);
 		console.log('---------------');
 	}, [timestamp]);
-
-	// useEffect(() => {
-	// 	console.log(gameColor);
-	// 	console.log(colorFromUser);
-	// 	console.log(timestamp);
-	// }, [timestamp]);
 
 	return (
 		<div className="main-container">
@@ -104,6 +106,15 @@ export default function Game() {
 					}}
 				>
 					FIND AN ITEM THAT IS THE SAME COLOR AS THE COLOR IN THE BOX.
+				</Typography>
+				<Typography
+					sx={{
+						color: 'white',
+						fontSize: '17px',
+						fontStyle: 'italic',
+					}}
+				>
+					Score : {score}
 				</Typography>
 				<div className="current-color">
 					<div className="wrongans">
@@ -120,6 +131,19 @@ export default function Game() {
 						>
 							Wrong Answer!
 						</Typography>
+						<Typography
+							color={'white'}
+							sx={{
+								fontSize: '15px',
+								textAlign: 'center',
+								marginBottom: '1rem',
+								visibility: `${
+									!showSensor ? 'hidden' : 'visible'
+								}`,
+							}}
+						>
+							This is your color
+						</Typography>
 
 						<Container
 							sx={{
@@ -133,6 +157,7 @@ export default function Game() {
 							}}
 						></Container>
 					</div>
+
 					<ColorBox
 						color={`rgb(${gameColor.r}, ${gameColor.g}, ${gameColor.b})`}
 					/>
@@ -165,6 +190,9 @@ export default function Game() {
 													...newColor,
 												};
 											});
+											setScore(0);
+											setShowSensor(false);
+											setKey(2);
 										}}
 									>
 										Restart

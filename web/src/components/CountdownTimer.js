@@ -23,7 +23,7 @@ export default function CountdownTimer(props) {
 				}}
 				size={130}
 				isPlaying
-				duration={60}
+				duration={10}
 				colors="#C18FEE"
 			>
 				{({ remainingTime, color }) => (
@@ -32,9 +32,9 @@ export default function CountdownTimer(props) {
 					</Typography>
 				)}
 			</CountdownCircleTimer>
-			<button onClick={() => props.setIsCorrect(true)}>
+			{/* <button onClick={() => props.setIsCorrect(true)}>
 				Restart Timer
-			</button>
+			</button> */}
 		</div>
 	);
 }
