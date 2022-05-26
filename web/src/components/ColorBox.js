@@ -11,6 +11,8 @@ export default function ColorBox(props) {
 				backgroundColor: '#D9D9D9',
 				width: 300,
 				height: 300,
+				// marginRight: '5rem',
+				marginLeft: '5rem',
 				marginRight: '5rem',
 			}}
 		>

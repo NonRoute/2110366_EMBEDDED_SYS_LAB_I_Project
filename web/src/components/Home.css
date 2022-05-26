@@ -74,14 +74,21 @@
 
 .current-color {
 	display: flex;
-	/* padding-left: 13.5rem; */
-	padding-left: 20vw;
+	padding-left: 8.5vw;
 	margin: 3rem;
 }
 
 .timer {
 	margin-top: 5rem;
+	/* margin-left: 5rem; */
 	width: 14.9vw;
+}
+
+.wrongans {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-bottom: 3rem;
 }
 
 .gameover {

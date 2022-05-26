@@ -15,7 +15,7 @@ export default function CountdownTimer(props) {
 				}}
 				onUpdate={(remainingTime) => {
 					if (props.isCorrect) {
-						setKey((prevKey) => prevKey + 1);
+						// setKey((prevKey) => prevKey + 1);
 						props.handleCorrectAnswer();
 						console.log('update');
 					}
@@ -23,7 +23,7 @@ export default function CountdownTimer(props) {
 				}}
 				size={130}
 				isPlaying
-				duration={10}
+				duration={60}
 				colors="#C18FEE"
 			>
 				{({ remainingTime, color }) => (

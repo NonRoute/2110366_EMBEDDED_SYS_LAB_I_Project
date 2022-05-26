@@ -1,4 +1,4 @@
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Container } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import CountdownTimer from './CountdownTimer';
 import ColorBox from './ColorBox';
@@ -33,6 +33,8 @@ export default function Game() {
 	const [gameColor, setGameColor] = useState({ r: 255, g: 255, b: 255 });
 	const [timestamp, setTimestamp] = useState(0);
 	const [isOver, setIsOver] = useState(false);
+	const [score, setScore] = useState(0);
+	const [showSensor, setShowSensor] = useState(false);
 
 	function handleCorrectAnswer() {
 		setIsCorrect(false);
@@ -41,6 +43,7 @@ export default function Game() {
 		setGameColor((prevState) => {
 			return { ...prevState, ...newColor };
 		});
+		setShowSensor(false);
 	}
 
 	function update() {
@@ -71,6 +74,8 @@ export default function Game() {
 	useEffect(() => {
 		if (checkColor(colorFromUser, gameColor)) {
 			setIsCorrect(true);
+		} else {
+			setShowSensor(true);
 		}
 		update();
 		// handleCorrectAnswer();
@@ -101,6 +106,33 @@ export default function Game() {
 					FIND AN ITEM THAT IS THE SAME COLOR AS THE COLOR IN THE BOX.
 				</Typography>
 				<div className="current-color">
+					<div className="wrongans">
+						<Typography
+							color={'white'}
+							sx={{
+								fontSize: '15px',
+								textAlign: 'center',
+								marginBottom: '1rem',
+								visibility: `${
+									!showSensor ? 'hidden' : 'visible'
+								}`,
+							}}
+						>
+							Wrong Answer!
+						</Typography>
+
+						<Container
+							sx={{
+								backgroundColor: `rgb(${colorFromUser.r}, ${colorFromUser.g}, ${colorFromUser.b})`,
+								width: 100,
+								height: 100,
+								borderRadius: '50%',
+								visibility: `${
+									!showSensor ? 'hidden' : 'visible'
+								}`,
+							}}
+						></Container>
+					</div>
 					<ColorBox
 						color={`rgb(${gameColor.r}, ${gameColor.g}, ${gameColor.b})`}
 					/>
@@ -158,13 +190,13 @@ export default function Game() {
 						padding: '1rem',
 					}}
 				>
-					FOUNT IT?
+					FOUND IT?
+				</Typography>
+				<Typography sx={{ color: 'white', fontSize: '17px' }}>
+					{'( PLACE THE ITEM IN FRONT OF THE SENSOR )'}
 				</Typography>
 				<Typography sx={{ color: 'white', fontSize: '17px' }}>
 					• CLAP 3 TIMES
-				</Typography>
-				<Typography sx={{ color: 'white', fontSize: '17px' }}>
-					• PLACE THE ITEM IN FRONT OF THE SENSOR
 				</Typography>
 			</div>
 		</div>
