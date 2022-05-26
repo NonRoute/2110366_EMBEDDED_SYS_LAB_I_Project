@@ -1,9 +1,10 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import CountdownTimer from './CountdownTimer';
 import ColorBox from './ColorBox';
 import app from '../utils/firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import { Link } from 'react-router-dom';
 
 function genColor() {
 	const r = Math.floor(Math.random() * 256);
@@ -31,6 +32,7 @@ export default function Game() {
 	});
 	const [gameColor, setGameColor] = useState({ r: 255, g: 255, b: 255 });
 	const [timestamp, setTimestamp] = useState(0);
+	const [isOver, setIsOver] = useState(false);
 
 	function handleCorrectAnswer() {
 		setIsCorrect(false);
@@ -102,11 +104,49 @@ export default function Game() {
 					<ColorBox
 						color={`rgb(${gameColor.r}, ${gameColor.g}, ${gameColor.b})`}
 					/>
-					<CountdownTimer
-						isCorrect={isCorrect}
-						handleCorrectAnswer={handleCorrectAnswer}
-						setIsCorrect={setIsCorrect}
-					/>
+					{!isOver ? (
+						<CountdownTimer
+							isCorrect={isCorrect}
+							handleCorrectAnswer={handleCorrectAnswer}
+							setIsCorrect={setIsCorrect}
+							setIsOver={setIsOver}
+						/>
+					) : (
+						<div className="gameover">
+							<Typography
+								className="gameovertext"
+								sx={{ fontSize: '22px' }}
+							>
+								Game Over
+							</Typography>
+							<div className="button-end">
+								<Button
+									variant="outlined"
+									sx={{ mt: 2, mr: 1 }}
+									onClick={() => {
+										setIsOver(false);
+										const newColor = genColor();
+										setGameColor((prevState) => {
+											return {
+												...prevState,
+												...newColor,
+											};
+										});
+									}}
+								>
+									Restart
+								</Button>
+								<Button
+									component={Link}
+									to="/"
+									variant="outlined"
+									sx={{ mt: 2 }}
+								>
+									Main Menu
+								</Button>
+							</div>
+						</div>
+					)}
 				</div>
 
 				<Typography

@@ -10,6 +10,7 @@ export default function CountdownTimer(props) {
 				key={key}
 				onComplete={() => {
 					console.log('gameover');
+					props.setIsOver(true);
 					return { shouldRepeat: true, delay: 2 };
 				}}
 				onUpdate={(remainingTime) => {
@@ -22,7 +23,7 @@ export default function CountdownTimer(props) {
 				}}
 				size={130}
 				isPlaying
-				duration={60}
+				duration={10}
 				colors="#C18FEE"
 			>
 				{({ remainingTime, color }) => (

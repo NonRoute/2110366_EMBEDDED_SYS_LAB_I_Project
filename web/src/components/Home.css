@@ -74,10 +74,37 @@
 
 .current-color {
 	display: flex;
-	padding-left: 13.5rem;
+	/* padding-left: 13.5rem; */
+	padding-left: 20vw;
 	margin: 3rem;
 }
 
 .timer {
 	margin-top: 5rem;
+	width: 14.9vw;
+}
+
+.gameover {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.gameovertext {
+	color: #ff1616;
+	animation: blinker 3s linear infinite;
+}
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
+}
+
+.buttonend {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
