@@ -121,7 +121,7 @@ export default function Game() {
 	}, []);
 
 	useEffect(() => {
-		if (checkColor(colorFromUser, gameColor)) {
+		if (checkColor(colorFromUser, gameColor) && key > 1) {
 			setIsCorrect(true);
 		} else if (score > 0) {
 			setShowSensor(true);
@@ -198,9 +198,9 @@ export default function Game() {
 								width: 100,
 								height: 100,
 								borderRadius: '50%',
-								// visibility: `${
-								// 	!showSensor ? 'hidden' : 'visible'
-								// }`,
+								visibility: `${
+									!showSensor ? 'hidden' : 'visible'
+								}`,
 							}}
 						></Container>
 					</div>
