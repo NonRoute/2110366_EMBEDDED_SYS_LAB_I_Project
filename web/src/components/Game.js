@@ -6,8 +6,10 @@ import app from '../utils/firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { Link } from 'react-router-dom';
 
-const RGBThreshold = 5000;
-const HueThreshold = 20;
+const RGBThreshold = 7000;
+const HueThreshold = 30;
+const SatThreshold = 70;
+const Ligthreshold = 40;
 
 function genColor() {
 	const r = Math.floor(Math.random() * 256);
@@ -41,22 +43,31 @@ function checkRGB(r1, g1, b1, r2, g2, b2) {
 	const diffR = Math.abs(r1 - r2);
 	const diffG = Math.abs(g1 - g2);
 	const diffB = Math.abs(b1 - b2);
-	return (
-		Math.sqrt(diffR * diffR + diffG * diffG + diffB * diffB) <= RGBThreshold
-	);
+	return diffR * diffR + diffG * diffG + diffB * diffB <= RGBThreshold;
 }
 
-function checkHue(r1, g1, b1, r2, g2, b2) {
+function getHueDistance(h1, h2) {
+	let diffH = Math.abs(h1 - h2);
+	return diffH > 180 ? 360 - diffH : diffH;
+}
+
+function checkHSL(r1, g1, b1, r2, g2, b2) {
 	const [h1, s1, l1] = RGBToHSL(r1, g1, b1);
 	const [h2, s2, l2] = RGBToHSL(r2, g2, b2);
-	const diffH = Math.abs(h1 - h2);
-	return diffH > 180 ? 360 - diffH <= HueThreshold : diffH <= HueThreshold;
+	const hueDistance = getHueDistance(h1, h2);
+	const satDistance = Math.abs(s1 - s2);
+	const lightDistance = Math.abs(l1 - l2);
+	return (
+		hueDistance <= HueThreshold &&
+		satDistance <= SatThreshold &&
+		lightDistance <= Ligthreshold
+	);
 }
 
 function checkColor(color1, color2) {
 	const { r: r1, g: g1, b: b1 } = color1;
 	const { r: r2, g: g2, b: b2 } = color2;
-	return checkRGB(r1, g1, b1, r2, g2, b2) || checkHue(r1, g1, b1, r2, g2, b2);
+	return checkRGB(r1, g1, b1, r2, g2, b2) || checkHSL(r1, g1, b1, r2, g2, b2);
 }
 
 export default function Game() {
@@ -187,9 +198,9 @@ export default function Game() {
 								width: 100,
 								height: 100,
 								borderRadius: '50%',
-								visibility: `${
-									!showSensor ? 'hidden' : 'visible'
-								}`,
+								// visibility: `${
+								// 	!showSensor ? 'hidden' : 'visible'
+								// }`,
 							}}
 						></Container>
 					</div>

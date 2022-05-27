@@ -23,7 +23,7 @@ export default function CountdownTimer(props) {
 				}}
 				size={130}
 				isPlaying
-				duration={10}
+				duration={60}
 				colors="#C18FEE"
 			>
 				{({ remainingTime, color }) => (
