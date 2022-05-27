@@ -66,18 +66,12 @@ static void MX_USART1_UART_Init(void);
 #define PRESCALAR 84
 
 //value for sensor calibration
-#define RED_D2 -0.000000315
-#define RED_D1 0.019
-#define RED_D0 -27.626
-#define RED_TH 30158
-#define GREEN_D2 -0.000000506
-#define GREEN_D1 0.0226
-#define GREEN_D0 3.2663
-#define GREEN_TH 22600
-#define BLUE_D2 -0.00000028
-#define BLUE_D1 0.0179
-#define BLUE_D0 -26.676
-#define BLUE_TH 22332
+#define RED_a 97.859
+#define RED_b -770.34
+#define GREEN_a 89.49
+#define GREEN_b -666.01
+#define BLUE_a 102.26
+#define BLUE_b -823.62
 
 enum Scaling { //output frequency scaling of color sensor
 	Scl0, Scl2, Scl20, Scl100
@@ -130,30 +124,15 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 			//Frequency to Color -> Depending of the filter
 			switch (set_color) {
 			case Red:
-				if (frequency > RED_TH) {
-					Output_Color = 255;
-				} else {
-					Output_Color = RED_D2 * frequency
-							* frequency+ RED_D1*frequency + RED_D0;
-				}
+				Output_Color = RED_a*log(frequency) + RED_b;
 				break;
 
 			case Green:
-				if (frequency > GREEN_TH) {
-					Output_Color = 255;
-				} else {
-					Output_Color = GREEN_D2 * frequency
-							* frequency+ GREEN_D1*frequency + GREEN_D0;
-				}
+				Output_Color = GREEN_a*log(frequency) + GREEN_b;
 				break;
 
 			case Blue:
-				if (frequency > BLUE_TH) {
-					Output_Color = 255;
-				} else {
-					Output_Color = BLUE_D2 * frequency
-							* frequency+ BLUE_D1*frequency + BLUE_D0;
-				}
+				Output_Color = BLUE_a*log(frequency) + BLUE_b;
 				break;
 			}
 
@@ -216,7 +195,7 @@ void Print_Output() { //send RGB value by UART1 to NodeMCU
 	char buffer[100];
 	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]),
 			(int) round(RGB[2]));
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
 void Print_Frequency(uint8_t set_color, float sum_frequency) { //send RGB and frequency by UART (used for sensor calibration)
@@ -355,7 +334,7 @@ int main(void) {
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
 
-//	ReadColorWithFrequency(1000, 2000); //uncomment for sensor calibration
+//	ReadColorWithFrequency(1000, 3000); //uncomment for sensor calibration
 
 	/* USER CODE END 2 */
 
