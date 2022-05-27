@@ -96,17 +96,17 @@ int Is_First_Captured = 0;
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3) {
-		if (Is_First_Captured == 0) // if the first rising edge is not captured
+		if (Is_First_Captured == 0) //if the first rising edge is not captured
 				{
-			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read the first value
-			Is_First_Captured = 1;  // set the first captured as true
+			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); //read the first value
+			Is_First_Captured = 1;  //set the first captured as true
 		}
 
-		else // If the first rising edge is captured, now we will capture the second edge
+		else //if the first rising edge is captured, now we will capture the second edge
 		{
-			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read second value
+			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); //read second value
 
-			if (IC_Val2 > IC_Val1) { //Avoid overflow
+			if (IC_Val2 > IC_Val1) { //avoid overflow
 				Difference = IC_Val2 - IC_Val1;
 			}
 
@@ -118,10 +118,10 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 
 			frequency = refClock / Difference;
 
-			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
-			Is_First_Captured = 0; // set it back to false
+			__HAL_TIM_SET_COUNTER(htim, 0);  //reset the counter
+			Is_First_Captured = 0; //set it back to false
 
-			//Frequency to Color -> Depending of the filter
+			//frequency to Color (depending of the filter)
 			switch (set_color) {
 			case Red:
 				Output_Color = RED_a*log(frequency) + RED_b;
@@ -136,7 +136,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 				break;
 			}
 
-			//Constrain Value to MaxRange
+			//constrain value to max range
 			if (Output_Color > 255)
 				Output_Color = 255;
 			if (Output_Color < 0)
@@ -193,7 +193,7 @@ void Set_Filter(uint8_t mode) //Mode is type enum Filter
 
 void Print_Output() { //send RGB value by UART1 to NodeMCU
 	char buffer[100];
-	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]),
+	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]), //convert double to int
 			(int) round(RGB[2]));
 	HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
 }
@@ -214,7 +214,7 @@ void Print_Frequency(uint8_t set_color, float sum_frequency) { //send RGB and fr
 				(int) round(sum_frequency));
 		break;
 	}
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY); //show output in Tera Term
 }
 
 float GetColor(uint8_t set_color) { //set filter and return color value get from interrupt callback function
@@ -334,7 +334,7 @@ int main(void) {
 	int clapCount = 0;
 	const int timeBetweenClap = 1000;
 
-//	ReadColorWithFrequency(1000, 3000); //uncomment for sensor calibration
+//	ReadColorWithFrequency(1000, 3000); //uncomment this line for sensor calibration
 
 	/* USER CODE END 2 */
 
