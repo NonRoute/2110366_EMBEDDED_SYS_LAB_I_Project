@@ -129,6 +129,5 @@ STM32_Project/.metadata/
 *.resources
 *.prefs
 *.xmi
-*.ini
 *.list
 *.pdom
