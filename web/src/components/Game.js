@@ -6,6 +6,9 @@ import app from '../utils/firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { Link } from 'react-router-dom';
 
+const RGBThreshold = 5000;
+const HueThreshold = 20;
+
 function genColor() {
 	const r = Math.floor(Math.random() * 256);
 	const g = Math.floor(Math.random() * 256);
@@ -14,13 +17,46 @@ function genColor() {
 	return { r, g, b };
 }
 
-function checkColor(color1, color2) {
-	const { r: r1, g: g1, b: b1 } = color1;
-	const { r: r2, g: g2, b: b2 } = color2;
+function RGBToHSL(r, g, b) {
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	const l = Math.max(r, g, b);
+	const s = l - Math.min(r, g, b);
+	const h = s
+		? l === r
+			? (g - b) / s
+			: l === g
+			? 2 + (b - r) / s
+			: 4 + (r - g) / s
+		: 0;
+	return [
+		60 * h < 0 ? 60 * h + 360 : 60 * h,
+		100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
+		(100 * (2 * l - s)) / 2,
+	];
+}
+
+function checkRGB(r1, g1, b1, r2, g2, b2) {
 	const diffR = Math.abs(r1 - r2);
 	const diffG = Math.abs(g1 - g2);
 	const diffB = Math.abs(b1 - b2);
-	return diffR < 25 && diffG < 25 && diffB < 25;
+	return (
+		Math.sqrt(diffR * diffR + diffG * diffG + diffB * diffB) <= RGBThreshold
+	);
+}
+
+function checkHue(r1, g1, b1, r2, g2, b2) {
+	const [h1, s1, l1] = RGBToHSL(r1, g1, b1);
+	const [h2, s2, l2] = RGBToHSL(r2, g2, b2);
+	const diffH = Math.abs(h1 - h2);
+	return diffH > 180 ? 360 - diffH <= HueThreshold : diffH <= HueThreshold;
+}
+
+function checkColor(color1, color2) {
+	const { r: r1, g: g1, b: b1 } = color1;
+	const { r: r2, g: g2, b: b2 } = color2;
+	return checkRGB(r1, g1, b1, r2, g2, b2) || checkHue(r1, g1, b1, r2, g2, b2);
 }
 
 export default function Game() {
