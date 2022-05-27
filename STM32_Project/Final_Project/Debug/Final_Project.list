@@ -1273,20 +1273,20 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
  8000f6a:	7f1b      	ldrb	r3, [r3, #28]
  8000f6c:	2b04      	cmp	r3, #4
  8000f6e:	f040 80dd 	bne.w	800112c <HAL_TIM_IC_CaptureCallback+0x1cc>
-		if (Is_First_Captured == 0) // if the first rising edge is not captured
+		if (Is_First_Captured == 0) //if the first rising edge is not captured
  8000f72:	4b7f      	ldr	r3, [pc, #508]	; (8001170 <HAL_TIM_IC_CaptureCallback+0x210>)
  8000f74:	681b      	ldr	r3, [r3, #0]
  8000f76:	2b00      	cmp	r3, #0
  8000f78:	d10a      	bne.n	8000f90 <HAL_TIM_IC_CaptureCallback+0x30>
 				{
-			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read the first value
+			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); //read the first value
  8000f7a:	2108      	movs	r1, #8
  8000f7c:	6878      	ldr	r0, [r7, #4]
  8000f7e:	f002 fc07 	bl	8003790 <HAL_TIM_ReadCapturedValue>
  8000f82:	4603      	mov	r3, r0
  8000f84:	4a7b      	ldr	r2, [pc, #492]	; (8001174 <HAL_TIM_IC_CaptureCallback+0x214>)
  8000f86:	6013      	str	r3, [r2, #0]
-			Is_First_Captured = 1;  // set the first captured as true
+			Is_First_Captured = 1;  //set the first captured as true
  8000f88:	4b79      	ldr	r3, [pc, #484]	; (8001170 <HAL_TIM_IC_CaptureCallback+0x210>)
  8000f8a:	2201      	movs	r2, #1
  8000f8c:	601a      	str	r2, [r3, #0]
@@ -1297,14 +1297,14 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 	}
 }
  8000f8e:	e0cd      	b.n	800112c <HAL_TIM_IC_CaptureCallback+0x1cc>
-			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); // read second value
+			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_3); //read second value
  8000f90:	2108      	movs	r1, #8
  8000f92:	6878      	ldr	r0, [r7, #4]
  8000f94:	f002 fbfc 	bl	8003790 <HAL_TIM_ReadCapturedValue>
  8000f98:	4603      	mov	r3, r0
  8000f9a:	4a77      	ldr	r2, [pc, #476]	; (8001178 <HAL_TIM_IC_CaptureCallback+0x218>)
  8000f9c:	6013      	str	r3, [r2, #0]
-			if (IC_Val2 > IC_Val1) { //Avoid overflow
+			if (IC_Val2 > IC_Val1) { //avoid overflow
  8000f9e:	4b76      	ldr	r3, [pc, #472]	; (8001178 <HAL_TIM_IC_CaptureCallback+0x218>)
  8000fa0:	681a      	ldr	r2, [r3, #0]
  8000fa2:	4b74      	ldr	r3, [pc, #464]	; (8001174 <HAL_TIM_IC_CaptureCallback+0x214>)
@@ -1352,12 +1352,12 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
  8000ff8:	460b      	mov	r3, r1
  8000ffa:	4962      	ldr	r1, [pc, #392]	; (8001184 <HAL_TIM_IC_CaptureCallback+0x224>)
  8000ffc:	e9c1 2300 	strd	r2, r3, [r1]
-			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
+			__HAL_TIM_SET_COUNTER(htim, 0);  //reset the counter
  8001000:	687b      	ldr	r3, [r7, #4]
  8001002:	681b      	ldr	r3, [r3, #0]
  8001004:	2200      	movs	r2, #0
  8001006:	625a      	str	r2, [r3, #36]	; 0x24
-			Is_First_Captured = 0; // set it back to false
+			Is_First_Captured = 0; //set it back to false
  8001008:	4b59      	ldr	r3, [pc, #356]	; (8001170 <HAL_TIM_IC_CaptureCallback+0x210>)
  800100a:	2200      	movs	r2, #0
  800100c:	601a      	str	r2, [r3, #0]
@@ -1672,7 +1672,7 @@ void Print_Output() { //send RGB value by UART1 to NodeMCU
  80012b2:	b09c      	sub	sp, #112	; 0x70
  80012b4:	af02      	add	r7, sp, #8
 	char buffer[100];
-	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]),
+	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]), //convert double to int
  80012b6:	4b23      	ldr	r3, [pc, #140]	; (8001344 <Print_Output+0x94>)
  80012b8:	ed93 7b00 	vldr	d7, [r3]
  80012bc:	eeb0 0a47 	vmov.f32	s0, s14
@@ -1700,7 +1700,7 @@ void Print_Output() { //send RGB value by UART1 to NodeMCU
  8001300:	eef0 0a67 	vmov.f32	s1, s15
  8001304:	f006 f868 	bl	80073d8 <round>
  8001308:	ec53 2b10 	vmov	r2, r3, d0
-	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]),
+	sprintf(buffer, "%d %d %d\r\n", (int) round(RGB[0]), (int) round(RGB[1]), //convert double to int
  800130c:	4610      	mov	r0, r2
  800130e:	4619      	mov	r1, r3
  8001310:	f7ff fc2a 	bl	8000b68 <__aeabi_d2iz>
@@ -1711,7 +1711,7 @@ void Print_Output() { //send RGB value by UART1 to NodeMCU
  800131c:	4622      	mov	r2, r4
  800131e:	490a      	ldr	r1, [pc, #40]	; (8001348 <Print_Output+0x98>)
  8001320:	f003 fde0 	bl	8004ee4 <siprintf>
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, &buffer, strlen(buffer), HAL_MAX_DELAY);
  8001324:	1d3b      	adds	r3, r7, #4
  8001326:	4618      	mov	r0, r3
  8001328:	f7fe ff5a 	bl	80001e0 <strlen>
@@ -1728,12 +1728,12 @@ void Print_Output() { //send RGB value by UART1 to NodeMCU
  8001342:	bdb0      	pop	{r4, r5, r7, pc}
  8001344:	200002e8 	.word	0x200002e8
  8001348:	08007888 	.word	0x08007888
- 800134c:	20000288 	.word	0x20000288
+ 800134c:	20000244 	.word	0x20000244
 
 08001350 <GetColor>:
 		break;
 	}
-	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart2, &buffer, strlen(buffer), HAL_MAX_DELAY); //show output in Tera Term
 }
 
 float GetColor(uint8_t set_color) { //set filter and return color value get from interrupt callback function
