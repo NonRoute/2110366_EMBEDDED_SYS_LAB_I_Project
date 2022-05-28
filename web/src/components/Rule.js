@@ -41,13 +41,26 @@ export default function Rule() {
 					>
 						Rule
 					</Typography>
-					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-						Duis mollis, est non commodo luctus, nisi erat porttitor
-						ligula.sadfjlklkfdsaklsfdklfsdaklfsdakfdskl;fsdllkfsklsfda;klfasdklfadklkflsd;kกดหดกหฟดlfsd;klasfdklfsklfasdklfkdslfklasd
-						adfs fsdllkfsklsfdafds fsdllkfsklsfdafdsfads
-						fsdllkfsklsfdafdsf
-						sadfjlklkfdsaklsfdklfsdaklfsdakfdsklafsd afsd fsd sfd
-						adfss dfs dfsa sadfjlklkfdsaklsfdklfsdaklfsdakfdsklafsd
+					<Typography
+						id="modal-modal-description"
+						sx={{ mt: 2, textIndent: '10%' }}
+					>
+						At the start of the game, there will be a total
+						countdown of 2 minutes, after which the website will
+						select one color at random. Players must find any
+						objects that have the same color as the color produced
+						by the website. When the items are discovered, the
+						players will place them in front of the color sensor and
+						clap three times to tell the website to verify the
+						colors. If the color of the chosen object matches the
+						color displayed by the website, the player will receive
+						a point. The website will then randomly select a new
+						color and continue to gain points. However, if the color
+						of the item is not similar, the player must check
+						another item. Players must try as many times as possible
+						to find items with colors that are similar to the color
+						chosen by the website. to collect as many points as
+						possible within the time limit
 					</Typography>
 				</Box>
 			</Modal>
