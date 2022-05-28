@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
@@ -23,7 +23,7 @@ export default function CountdownTimer(props) {
 				}}
 				size={130}
 				isPlaying
-				duration={10}
+				duration={120}
 				colors="#C18FEE"
 			>
 				{({ remainingTime, color }) => (
@@ -32,9 +32,9 @@ export default function CountdownTimer(props) {
 					</Typography>
 				)}
 			</CountdownCircleTimer>
-			{/* <button onClick={() => props.setIsCorrect(true)}>
-				Restart Timer
-			</button> */}
+			<Button sx={{ml : 3.8, mt : 1}} onClick={() => props.handleSkipAnswer()}>
+					Skip
+			</Button>
 		</div>
 	);
 }
