@@ -95,6 +95,17 @@ export default function Game() {
 		});
 	}
 
+	function handleSkipAnswer() {
+		setIsCorrect(false);
+		setShowSensor(false);
+		console.log('skip');
+		setScore((prevScore) => prevScore - 1);
+		const newColor = genColor();
+		setGameColor((prevState) => {
+			return { ...prevState, ...newColor };
+		});
+	}
+
 	function update() {
 		// var userId = 'XJI27hbv5eVmvEXTaCJTQnhZ33C2';
 		var userId = 's1x8XhRgsceMNKnZPV0pvGIVhTb2';
@@ -215,6 +226,7 @@ export default function Game() {
 							handleCorrectAnswer={handleCorrectAnswer}
 							setIsCorrect={setIsCorrect}
 							setIsOver={setIsOver}
+							handleSkipAnswer={handleSkipAnswer}
 						/>
 					) : (
 						<div className="timer">
