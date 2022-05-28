@@ -16,9 +16,9 @@ function genColor() {
 	const g = Math.floor(Math.random() * 256);
 	let b = Math.floor(Math.random() * 256);
 
-	while (r < 200 && r > 100 && b > 200){
-		r = Math.floor(Math.random()*256);
-		b = Math.floor(Math.random()*256);
+	while (r < 200 && r > 100 && b > 200) {
+		r = Math.floor(Math.random() * 256);
+		b = Math.floor(Math.random() * 256);
 	}
 
 	return { r, g, b };
@@ -88,10 +88,17 @@ export default function Game() {
 	const [score, setScore] = useState(-1);
 	const [showSensor, setShowSensor] = useState(false);
 	const [key, setKey] = useState(0);
+	const [transition, setTransition] = useState(false);
 
 	function handleCorrectAnswer() {
 		setIsCorrect(false);
 		setShowSensor(false);
+		if (key > 1) {
+			setTransition(true);
+			setTimeout(() => {
+				setTransition(false);
+			}, 1000);
+		}
 		console.log('correct');
 		setScore((prevScore) => prevScore + 1);
 		const newColor = genColor();
@@ -104,7 +111,7 @@ export default function Game() {
 		setIsCorrect(false);
 		setShowSensor(false);
 		console.log('skip');
-		setScore((prevScore) => prevScore > 0 ? prevScore - 1 : 0);
+		setScore((prevScore) => (prevScore > 0 ? prevScore - 1 : 0));
 		const newColor = genColor();
 		setGameColor((prevState) => {
 			return { ...prevState, ...newColor };
@@ -182,19 +189,33 @@ export default function Game() {
 				</Typography>
 				<div className="current-color">
 					<div className="wrongans">
-						<Typography
-							color={'white'}
-							sx={{
-								fontSize: '15px',
-								textAlign: 'center',
-								marginBottom: '1rem',
-								visibility: `${
-									!showSensor ? 'hidden' : 'visible'
-								}`,
-							}}
-						>
-							Wrong Answer!
-						</Typography>
+						{!transition ? (
+							<Typography
+								color={'white'}
+								sx={{
+									fontSize: '15px',
+									textAlign: 'center',
+									marginBottom: '1rem',
+									visibility: `${
+										!showSensor ? 'hidden' : 'visible'
+									}`,
+								}}
+							>
+								Wrong Answer!
+							</Typography>
+						) : (
+							<Typography
+								color={'green'}
+								sx={{
+									fontSize: '22px',
+									textAlign: 'center',
+									marginTop: '6rem',
+								}}
+							>
+								Correct!
+							</Typography>
+						)}
+
 						<Typography
 							color={'white'}
 							sx={{
@@ -208,18 +229,19 @@ export default function Game() {
 						>
 							This is your color
 						</Typography>
-
-						<Container
-							sx={{
-								backgroundColor: `rgb(${colorFromUser.r}, ${colorFromUser.g}, ${colorFromUser.b})`,
-								width: 100,
-								height: 100,
-								borderRadius: '50%',
-								visibility: `${
-									!showSensor ? 'hidden' : 'visible'
-								}`,
-							}}
-						></Container>
+						{!transition && (
+							<Container
+								sx={{
+									backgroundColor: `rgb(${colorFromUser.r}, ${colorFromUser.g}, ${colorFromUser.b})`,
+									width: 100,
+									height: 100,
+									borderRadius: '50%',
+									visibility: `${
+										!showSensor ? 'hidden' : 'visible'
+									}`,
+								}}
+							></Container>
+						)}
 					</div>
 
 					<ColorBox
