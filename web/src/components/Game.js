@@ -96,7 +96,8 @@ export default function Game() {
 	}
 
 	function update() {
-		var userId = 'XJI27hbv5eVmvEXTaCJTQnhZ33C2';
+		// var userId = 'XJI27hbv5eVmvEXTaCJTQnhZ33C2';
+		var userId = 's1x8XhRgsceMNKnZPV0pvGIVhTb2';
 		const dbRef = ref(getDatabase(app));
 
 		onValue(dbRef, function(snapshot) {
