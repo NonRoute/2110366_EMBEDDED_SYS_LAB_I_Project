@@ -12,9 +12,14 @@ const SatThreshold = 70;
 const Ligthreshold = 40;
 
 function genColor() {
-	const r = Math.floor(Math.random() * 256);
+	let r = Math.floor(Math.random() * 256);
 	const g = Math.floor(Math.random() * 256);
-	const b = Math.floor(Math.random() * 256);
+	let b = Math.floor(Math.random() * 256);
+
+	while (r < 200 && r > 100 && b > 200){
+		r = Math.floor(Math.random()*256);
+		b = Math.floor(Math.random()*256);
+	}
 
 	return { r, g, b };
 }
@@ -99,7 +104,7 @@ export default function Game() {
 		setIsCorrect(false);
 		setShowSensor(false);
 		console.log('skip');
-		setScore((prevScore) => prevScore - 1);
+		setScore((prevScore) => prevScore > 0 ? prevScore - 1 : 0);
 		const newColor = genColor();
 		setGameColor((prevState) => {
 			return { ...prevState, ...newColor };
