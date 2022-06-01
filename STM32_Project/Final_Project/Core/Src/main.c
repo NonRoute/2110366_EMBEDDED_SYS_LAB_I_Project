@@ -62,7 +62,7 @@ static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN 0 */
 
 #define TIMCLOCK 84000000
-#define PRESCALAR 84
+#define PRESCALER 84
 
 //value for sensor calibration
 #define RED_a 97.859
@@ -113,7 +113,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 				Difference = (0xffffffff - IC_Val1) + IC_Val2;
 			}
 
-			float refClock = TIMCLOCK / (PRESCALAR);
+			float refClock = TIMCLOCK / (PRESCALER);
 
 			frequency = refClock / Difference;
 
