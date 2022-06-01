@@ -346,8 +346,8 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detected sound
-			if (!is_detected && undetected_time > detected_delay) { //undetected sound before and undetected more than detected_delay
+		if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0) == HAL_OK) { //detect sound
+			if (!is_detected && undetected_time > detected_delay) { //undetected sound and undetected more than detected_delay
 				if (HAL_GetTick() <= lastClap + timeBetweenClap)
 					clapCount += 1;
 				else
